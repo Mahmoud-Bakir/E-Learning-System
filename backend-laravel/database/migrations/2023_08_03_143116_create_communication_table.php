@@ -17,16 +17,20 @@ class CreateCommunicationTable extends Migration{
             $table->timestamps();
         });
 
-        Schema::create('meetingtypes', function (Blueprint $table) {
+        Schema::create('message_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->unsignedBigInteger('user'); // The foreign key to users table
+            $table->string('extra')->nullable();
+            // Add other message type related columns as needed
             $table->timestamps();
         });
+
+ 
     }
 
     public function down(){
         Schema::dropIfExists('communication');
-        Schema::dropIfExists('meetingtypes');
+        Schema::dropIfExists('message_types');
+       
     }
 }

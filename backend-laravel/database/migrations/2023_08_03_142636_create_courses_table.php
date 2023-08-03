@@ -54,6 +54,13 @@ class CreateCoursesTable extends Migration
             $table->string('Filepath')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('meetingtypes', function (Blueprint $table) {
+            $table->id();
+            $table->string('type');
+            $table->unsignedBigInteger('user'); // The foreign key to users table
+            $table->timestamps();
+        });
     }
 
     public function down()
@@ -63,5 +70,6 @@ class CreateCoursesTable extends Migration
         Schema::dropIfExists('assignments');
         Schema::dropIfExists('submissions');
         Schema::dropIfExists('student_enrollments');
+        Schema::dropIfExists('meetingtypes');
     }
 }
