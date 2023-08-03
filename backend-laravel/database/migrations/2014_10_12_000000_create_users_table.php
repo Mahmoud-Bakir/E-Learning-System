@@ -10,6 +10,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('UserType'); // The foreign key to user_types
             $table->string('Email')->unique();
             $table->string('Password');
