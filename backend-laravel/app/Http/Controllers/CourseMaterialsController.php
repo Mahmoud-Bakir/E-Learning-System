@@ -18,7 +18,7 @@ class CourseMaterialsController extends Controller {
 
     $courseMaterials = CourseMaterial::where('course_id', $courseId)->get();
 
-    return response()->json(['data' => ['courseMaterials' => $courseMaterials]]);
+    return response()->json(['courseMaterials' => $courseMaterials]);
 
     }
 
