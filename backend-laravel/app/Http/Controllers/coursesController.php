@@ -9,8 +9,8 @@ use App\Models\User;
 
 class coursesController extends Controller {
 
-    function fetchAllCourses() {
-    try {
+    function getAllCourses() {
+        try {
         $courses = Course::all();
 
         $courseArray = [];
@@ -18,7 +18,7 @@ class coursesController extends Controller {
         foreach ($courses as $course) {
             $courseArray[] = [
                 'id' => $course->id,
-                'name' => $course->name,
+                'name' => $course->course_name,
                 'description' => $course->description,
                 'limit' => $course->limit,
                 'teacher_id' => $course->teacher_id,
@@ -28,9 +28,9 @@ class coursesController extends Controller {
         }
 
         return response()->json(['courses' => $courseArray]);
-    } catch (Exception $e) {
+        } catch (Exception $e) {
         return response()->json(['error' => 'An error occurred while fetching courses.'], 500);
-    }
+        }
     }
 
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\StudentEnrollment;
 
 class StudentEnrollments extends Controller
 {
@@ -34,11 +36,8 @@ class StudentEnrollments extends Controller
         return response()->json(['message' => 'Enrollment successful.'], 200);
     }
 
-    use App\Models\User;
-use App\Models\Enrollment;
-use Illuminate\Http\Request;
 
-function getUserProgress($userId) {
+    function getUserProgress($userId) {
 
     $user = User::where('id', $userId)
                 ->where('user_type', 2)
@@ -52,4 +51,8 @@ function getUserProgress($userId) {
 
     return response()->json(['data' => ['progress' => $enrollments]]);
 }
+
+    function getEnrolledCourses() {
+
+    }
 }
