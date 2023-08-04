@@ -10,56 +10,62 @@ class CreateCoursesTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('ID');
-            $table->string('CourseName');
-            $table->text('Description')->nullable();
-            $table->integer('EnrollmentLimit')->nullable();
-            $table->unsignedBigInteger('TeacherID'); // The foreign key to users table
-            $table->unsignedBigInteger('meetType')->nullable(); // The foreign key to meetingtypes table
+            $table->id();
+            $table->string('course_name');
+            $table->text('description')->nullable();
+            $table->integer('enrollment_limit')->nullable();
+            $table->integer('sessions_number')->nullable();
+            $table->unsignedBigInteger('teacher_id'); // The foreign key to users table
+            $table->unsignedBigInteger('meeting_link');
             $table->timestamps();
+
+            $table->foreign('teacher_id')->references('id')->on('users');
+
         });
 
         Schema::create('student_enrollments', function (Blueprint $table) {
-            $table->id('ID');
-            $table->unsignedBigInteger('UserID'); // The foreign key to users table
-            $table->unsignedBigInteger('CourseID'); // The foreign key to courses table
-            $table->date('EnrollmentDate');
+            $table->id();
+            $table->unsignedBigInteger('student_id'); // The foreign key to users table
+            $table->unsignedBigInteger('course_id'); // The foreign key to courses table
+            $table->date('enrollment_date');
             $table->integer('attendance');
             $table->integer('progress');
             $table->timestamps();
+
+            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses');
         });
 
         Schema::create('course_materials', function (Blueprint $table) {
-            $table->id('ID');
-            $table->unsignedBigInteger('CourseID'); // The foreign key to courses table
-            $table->string('Title');
-            $table->text('Description')->nullable();
-            $table->string('FileURL')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('course_id'); // The foreign key to courses table
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('file_URL')->nullable();
             $table->timestamps();
+
+            $table->foreign('course_id')->references('id')->on('courses');
         });
 
         Schema::create('assignments', function (Blueprint $table) {
-            $table->id('AssignmentID');
-            $table->unsignedBigInteger('CourseID'); // The foreign key to courses table
-            $table->string('Title');
-            $table->text('Description')->nullable();
-            $table->date('DueDate')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('course_id'); // The foreign key to courses table
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->date('due_date')->nullable();
             $table->timestamps();
+
+            $table->foreign('course_id')->references('id')->on('courses');
         });
         
         Schema::create('submissions', function (Blueprint $table) {
-            $table->id('ID');
-            $table->unsignedBigInteger('EnrollmentID'); // The foreign key to student_enrollments table
-            $table->unsignedBigInteger('AssignmentID'); // The foreign key to assignments table
-            $table->string('Filepath')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('meetingtypes', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->unsignedBigInteger('user'); // The foreign key to users table
-            $table->timestamps();
+            $table->unsignedBigInteger('student_id'); // The foreign key to student_enrollments table
+            $table->unsignedBigInteger('assignment_id'); // The foreign key to assignments table
+            $table->string('Filepath')->nullable();
+            
+            $table->foreign('student_id')->references('ID')->on('student_enrollments');
+            $table->foreign('assignment_id')->references('ID')->on('assignments');
         });
     }
 
@@ -70,6 +76,5 @@ class CreateCoursesTable extends Migration
         Schema::dropIfExists('assignments');
         Schema::dropIfExists('submissions');
         Schema::dropIfExists('student_enrollments');
-        Schema::dropIfExists('meetingtypes');
     }
 }
