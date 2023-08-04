@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             // Add foreign keys
-            $table->foreign('UserType')->references('id')->on('user_types')->onDelete('cascade');
+            $table->foreign('user_type')->references('id')->on('user_types')->onDelete('cascade');
 
         });
 
