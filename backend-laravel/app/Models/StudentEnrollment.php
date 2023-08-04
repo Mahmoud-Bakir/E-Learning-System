@@ -10,10 +10,14 @@ class StudentEnrollment extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo(User::class, 'UserID', 'ID');
+        return $this->belongsTo(User::class, 'UserID');
     }
-
+    
     public function course(){
-        return $this->belongsTo(Course::class, 'CourseID', 'ID');
+        return $this->belongsTo(Course::class, 'CourseID');
+    }
+    
+    public function submissions(){
+        return $this->hasMany(Submission::class, 'EnrollmentID');
     }
 }
