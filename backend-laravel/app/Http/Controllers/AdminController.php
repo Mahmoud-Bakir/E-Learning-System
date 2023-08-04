@@ -17,7 +17,6 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-
         $user = new User; 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -25,11 +24,6 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->user_type_id = $request->user_type_id;
         $user->save();
-
-        $token = Auth::login($user);
-        $user->token = $token;
-        $user->role = $request->role;
-
         return response()->json([
             'status' => 'Success',
             'data' => $user
