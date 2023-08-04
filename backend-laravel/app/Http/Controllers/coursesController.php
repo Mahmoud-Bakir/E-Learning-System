@@ -33,7 +33,4 @@ class coursesController extends Controller {
         }
     }
 
-
-
-
 }
