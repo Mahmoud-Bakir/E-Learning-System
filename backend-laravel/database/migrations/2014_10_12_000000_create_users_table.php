@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('UserType'); // The foreign key to user_types
+            $table->unsignedBigInteger('user_type'); // The foreign key to user_types
             $table->string('email')->unique();
             $table->string('password');
             $table->string('first_name');
@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             // Add foreign keys
-            $table->foreign('UserType')->references('id')->on('user_types')->onDelete('cascade');
+            $table->foreign('user_type')->references('id')->on('user_types')->onDelete('cascade');
 
         });
 

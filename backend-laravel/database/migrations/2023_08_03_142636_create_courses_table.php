@@ -16,7 +16,7 @@ class CreateCoursesTable extends Migration
             $table->integer('enrollment_limit')->nullable();
             $table->integer('sessions_number')->nullable();
             $table->unsignedBigInteger('teacher_id'); // The foreign key to users table
-            $table->unsignedBigInteger('meeting_link');
+            $table->string('meeting_link');
             $table->timestamps();
 
             $table->foreign('teacher_id')->references('id')->on('users');
@@ -53,6 +53,7 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('due_date')->nullable();
+            $table->decimal('total_grade', 5, 2);
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses');
@@ -63,6 +64,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('student_id'); // The foreign key to student_enrollments table
             $table->unsignedBigInteger('assignment_id'); // The foreign key to assignments table
             $table->string('Filepath')->nullable();
+            $table->decimal('grade', 5, 2)->nullable();
             
             $table->foreign('student_id')->references('ID')->on('student_enrollments');
             $table->foreign('assignment_id')->references('ID')->on('assignments');

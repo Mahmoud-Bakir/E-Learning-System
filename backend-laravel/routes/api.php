@@ -7,14 +7,19 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\CourseMaterialsController;
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(["prefix" => "v-0.0.1"], function(){
+  Route::group(["middleware" => "auth:api"], function(){
+       $user = Auth::user();
+       Route::group(["prefix" => "user"], function(){
+         Route::get("profile", [AuthController::class, "profile"]);
+         Route::post("logout", [AuthController::class, "logout"]);
+         Route::post("refresh", [AuthController::class, "refresh"]);
+        });
+    });
+   Route::group(["middleware" => "auth.teacher"], function(){
+    });
+  Route::group(["prefix" => "guest"], function(){
+     Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
+     Route::post("login", [AuthController::class, "login"]);
 });
-
-// Added by Student-backend (Joe)
-Route::post("login", [AuthController::class, "login"]);
-Route::post("register", [AuthController::class, "register"]);
-
-Route::get("get_all_courses", [CoursesController::class, "getAllCourses"]);
-
-Route::post("fetch_course_materials", [CourseMaterialsController::class, "fetchCourseMaterials"]);
+});
