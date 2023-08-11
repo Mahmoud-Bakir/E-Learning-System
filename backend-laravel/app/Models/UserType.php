@@ -10,7 +10,7 @@ class UserType extends Model
     use HasFactory;
 
     public function users(){
-        return $this->hasMany(User::class, 'UserType', 'id');
+        return $this->hasMany(User::class);
     }
 
 }
