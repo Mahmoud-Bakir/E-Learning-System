@@ -32,6 +32,7 @@ Route::group(["prefix" => "Admin"], function(){
     Route::get("/get_all_enrolled_courses", [StudentController::class, "getEnrolledCourses"]);
     Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
     Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
+    Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
  });
 
 

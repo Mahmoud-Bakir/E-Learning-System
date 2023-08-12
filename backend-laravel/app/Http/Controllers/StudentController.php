@@ -115,6 +115,30 @@ class StudentController extends Controller {
                 ], 200);
     }
 
+    public function submitAssignment(Request $request) {
+        $request->validate([
+            'assignment_id' => 'required|exists:assignments,id',
+            'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $userId = Auth::id();
+        $assignmentId = $request->assignment_id;
+        $filePath = $request->Filepath;
+
+        $submission = new Submission([
+            'student_id' => $userId,
+            'assignment_id' => $assignmentId,
+            'Filepath' => $filePath,
+            'grade' => null,
+        ]);
+
+        $submission->save();
+
+        return response()->json([
+            'message' => 'Assignment submitted successfully.',
+        ], 200);
+    }
+
     function fetchCourseMaterials(Request $request) {
 
         $course_id = $request->course_id;
@@ -129,6 +153,7 @@ class StudentController extends Controller {
         return response()->json(['courseMaterials' => $courseMaterials]);
 
     }
+
 
     function getUserProgress($userId) {
 
