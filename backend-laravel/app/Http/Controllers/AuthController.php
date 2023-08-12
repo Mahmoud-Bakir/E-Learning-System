@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 class AuthController extends Controller
-{  
+{
     public function __construct(){
         $this->middleware('auth:api', ['except' => ['signUp','logIn']]);
     }
@@ -26,7 +26,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users|max:255',
             'password' => 'required|string|min:1',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
@@ -34,7 +34,7 @@ class AuthController extends Controller
                 'errors' => $validator->errors(),
             ], 422);
         }
-        
+
         // dd($request);
 
         $user = new User();
@@ -59,7 +59,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:1',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
@@ -67,21 +67,21 @@ class AuthController extends Controller
                 'errors' => $validator->errors(),
             ], 422);
         }
-    
+
         $credentials = $request->only('email', 'password');
-    
+
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Invalid credentials',
             ], 401);
         }
-    
+
         $token = Auth::attempt($credentials);
-    
+
         $user = Auth::user();
         $user->token = $token;
-    
+
         return response()->json([
             'message' => 'User signin successfully',
             'token' => $token,

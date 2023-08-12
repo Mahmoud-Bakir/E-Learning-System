@@ -18,12 +18,12 @@ class Course extends Model
     {
         return $this->hasMany(StudentEnrollment::class, 'CourseID');
     }
-    
+
     public function materials()
     {
         return $this->hasMany(CourseMaterial::class, 'CourseID');
     }
-    
+
     public function assignments()
     {
         return $this->hasMany(Assignment::class, 'CourseID');

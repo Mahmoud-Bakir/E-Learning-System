@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 
 Route::group(["prefix" => "Admin"], function(){
 
@@ -27,6 +28,8 @@ Route::group(["prefix" => "Admin"], function(){
 
 
  Route::group(["prefix" => "Student"], function(){
+    Route::get("/get_all_courses", [StudentController::class, "getAllCourses"]);
+    Route::get("/get_all_enrolled_courses", [StudentController::class, "getEnrolledCourses"]);
  });
 
 
