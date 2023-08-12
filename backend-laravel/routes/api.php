@@ -3,9 +3,15 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::group(["prefix" => "Admin"], function(){
-  Route::post("/signup", [AuthController::class, "signUp"]);
+
+  Route::post("/createuser", [AuthController::class, "signUp"]);
+  Route::post("/updateuser", [AdminController::class, "updateUser"]);
+  Route::post("/deleteuser", [AdminController::class, "deleteUser"]);
+
+  Route::post("/createcourse", [AdminController::class, "createClass"]);
  });
 
 
