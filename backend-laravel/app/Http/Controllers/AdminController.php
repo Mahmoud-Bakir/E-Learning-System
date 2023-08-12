@@ -41,6 +41,18 @@ class AdminController extends Controller{
         ]);
     }
 
+    public function deleteUser(Request $request){
+        $userId = $request->user_id;
+        $user = User::find($userId);
 
+        if(!$user){return response() -> json(['Error' => 'No user found'],404);}
+
+        $user->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User account deleted successfully',
+        ]);
+    }
     
 }
