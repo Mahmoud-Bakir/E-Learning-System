@@ -7,19 +7,28 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\CourseMaterialsController;
 
 
-Route::group(["prefix" => "v-0.0.1"], function(){
-  Route::group(["middleware" => "auth:api"], function(){
-       $user = Auth::user();
-       Route::group(["prefix" => "user"], function(){
-         Route::get("profile", [AuthController::class, "profile"]);
-         Route::post("logout", [AuthController::class, "logout"]);
-         Route::post("refresh", [AuthController::class, "refresh"]);
-        });
-    });
-   Route::group(["middleware" => "auth.teacher"], function(){
-    });
-  Route::group(["prefix" => "guest"], function(){
-     Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
-     Route::post("login", [AuthController::class, "login"]);
-});
-});
+Route::group(["prefix" => "Admin"], function(){
+  Route::post("/signup", [AuthController::class, "signUp"]);
+ });
+
+
+
+ Route::group(["prefix" => "Teacher"], function(){
+ });
+
+
+
+ Route::group(["prefix" => "Parent"], function(){
+ });
+
+
+
+ Route::group(["prefix" => "Student"], function(){
+ });
+
+
+
+
+Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
+Route::post("/login", [AuthController::class, "logIn"]);
+Route::post("/logout", [AuthController::class, "logout"]);
