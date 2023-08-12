@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Category;
 
 
 class AdminController extends Controller{
@@ -58,23 +59,20 @@ class AdminController extends Controller{
     function createClass (Request $request){
 
         $validator = Validator::make($request->all(), [
-            'teacher_name' => 'required',
+            'teacher_email' => 'required|email',
             'course_name' => 'required|unique:courses',
-            'description' => 'required|string',
             'category_name' => 'required|string',
-            'enrollment_limit' => 'required|numeric',
-            'sessions_number' => 'required|numeric',
+            'enrollment_limit' => 'required|numeric|min:0',
+            'sessions_number' => 'required|numeric|min:0',
             'meeting_link' => 'required|unique:courses',
-            
-            'user_type' => 'exists:user_types,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $teacher_name = $request->teacher_name;
-        $teacher = Category::where('first_name', $teacher_name)->first();
+        $teacher_email = $request->teacher_email;
+        $teacher = User::where('email', $teacher_email)->first();
 
         if (!$teacher || $teacher->user_type != 2) {
             return response()->json(["No teacher was found, try again"],404);
@@ -90,11 +88,11 @@ class AdminController extends Controller{
             return response()->json(["Category created, please try again"]);
         }
 
-        $course = new course ();
-        $course->teacher_id = $request->teacher->id;
+        $course = new Course();
+        $course->teacher_id = $teacher->id;
         $course->course_name = $request->course_name;
         $course->description = $request->description;
-        $course->category_id = $request->category->id;
+        $course->category_id = $category->id;
         $course->enrollment_limit = $request->enrollment_limit;
         $course-> sessions_number = $request->sessions_number;
         $course-> meeting_link = $request->meeting_link;
@@ -102,6 +100,7 @@ class AdminController extends Controller{
 
         return response() -> json([
             'message' => 'Course created successfully',
+            'Teacher Email' => $teacher->email,
             'course' => $course,
         ]);
             
