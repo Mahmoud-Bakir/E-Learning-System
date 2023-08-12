@@ -114,6 +114,8 @@ class AdminController extends Controller{
     function updateCourse(Request $request){
     
         $course = Course::find($request->course_id);
+        if(!$course){return response() -> json(['Error' => 'No course found'],404);}
+
 
         $course->update([
             'course_name' => $request->course_name?? $course->course_name,
@@ -126,6 +128,18 @@ class AdminController extends Controller{
         return response()->json([
             'message' => 'Course updated successfully',
             'course' => $course,
+        ]);
+    }
+
+    function deleteCourse(Request $request){
+        $course = Course::find($request->course_id);
+        if(!$course){return response() -> json(['Error' => 'No course found'],404);}
+
+        $course->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User course deleted successfully',
         ]);
     }
     

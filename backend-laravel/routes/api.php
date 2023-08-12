@@ -13,7 +13,7 @@ Route::group(["prefix" => "Admin"], function(){
 
   Route::post("/create_course", [AdminController::class, "createClass"]);
   Route::post("/update_course", [AdminController::class, "updateCourse"]);
-  Route::post("/delete_ourse", [AdminController::class, "createClass"]);
+  Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
  });
 
 
