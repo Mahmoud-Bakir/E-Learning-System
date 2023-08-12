@@ -29,5 +29,4 @@ class Course extends Model
         return $this->hasMany(Assignment::class, 'CourseID');
     }
 
-
 }
