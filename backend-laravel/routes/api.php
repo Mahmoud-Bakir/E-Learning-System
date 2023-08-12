@@ -3,20 +3,38 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 
-Route::group(["prefix" => "v-0.0.1"], function(){
-  Route::group(["middleware" => "auth:api"], function(){
-       $user = Auth::user(); 
-       Route::group(["prefix" => "user"], function(){
-         Route::get("profile", [AuthController::class, "profile"]);
-         Route::post("logout", [AuthController::class, "logout"]);
-         Route::post("refresh", [AuthController::class, "refresh"]);
-        });
-    });
-   Route::group(["middleware" => "auth.teacher"], function(){
-    });
-  Route::group(["prefix" => "guest"], function(){
-     Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
-     Route::post("login", [AuthController::class, "login"]);
-});
-});
+Route::group(["prefix" => "Admin"], function(){
+
+  Route::post("/createuser", [AuthController::class, "signUp"]);
+  Route::post("/updateuser", [AdminController::class, "updateUser"]);
+  Route::post("/deleteuser", [AdminController::class, "deleteUser"]);
+
+  Route::post("/createcourse", [AdminController::class, "createClass"]);
+ });
+
+
+
+ Route::group(["prefix" => "Teacher"], function(){
+ });
+
+
+
+ Route::group(["prefix" => "Parent"], function(){
+ });
+
+
+
+ Route::group(["prefix" => "Student"], function(){
+    Route::get("/get_all_courses", [StudentController::class, "getAllCourses"]);
+    Route::get("/get_all_enrolled_courses", [StudentController::class, "getEnrolledCourses"]);
+ });
+
+
+
+
+Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
+Route::post("/login", [AuthController::class, "logIn"]);
+Route::post("/logout", [AuthController::class, "logout"]);

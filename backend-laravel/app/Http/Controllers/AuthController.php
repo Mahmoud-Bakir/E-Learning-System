@@ -1,12 +1,17 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
-class AuthController extends Controller{
+class AuthController extends Controller
+{
+    public function __construct(){
+        $this->middleware('auth:api', ['except' => ['signUp','logIn']]);
+    }
 
     public function unauthorized(Request $request){
         return response()->json([
@@ -15,39 +20,73 @@ class AuthController extends Controller{
         ], 200);
     }
 
-    public function profile(Request $request){
+    public function signUp(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_type' => 'required',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|string|min:1',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        // dd($request);
+
+        $user = new User();
+        $user->user_type = $request->user_type;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $token = Auth::login($user);
+
         return response()->json([
-            'status' => 'Success',
-            'data' => Auth::user(),
-        ], 200);
+            'message' => 'User created successfully',
+            'token' => $token,
+        ]);
     }
 
-    public function login(Request $request){
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+    public function logIn(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:1',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
- 
-        if (!$token) {
+        if (!Auth::attempt($credentials)) {
             return response()->json([
-                'status' => 'Error',
-                'message' => 'Unauthorized',
+                'status' => 'error',
+                'message' => 'Invalid credentials',
             ], 401);
         }
 
+        $token = Auth::attempt($credentials);
+
         $user = Auth::user();
         $user->token = $token;
-        $user->role = $user->user_type_id == 1 ? "admin" : "user";
-        
-        return response()->json([
-                'status' => 'Success',
-                'data' => $user
-            ]);
 
+        return response()->json([
+            'message' => 'User signin successfully',
+            'token' => $token,
+            'user-type' => $user->user_type
+        ]);
     }
 
     public function logout(){
@@ -57,15 +96,4 @@ class AuthController extends Controller{
             'message' => 'Successfully logged out',
         ]);
     }
-
-    public function refresh() {
-        $user = Auth::user();
-        $user->token = Auth::refresh();
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $user
-        ]);
-    }
-
 }
