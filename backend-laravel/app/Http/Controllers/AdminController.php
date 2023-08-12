@@ -30,7 +30,12 @@ class AdminController extends Controller{
         $user = User::find($user_id);
         if(!$user){return response() -> json(['Error' => 'No user found'],404);}
 
-        $user->update($request->only(['first_name', 'last_name', 'email', 'user_type']));
+        $user->update($request->only([
+            'first_name' ??$user->first_name,
+            'last_name' ??$user->last_name,
+            'email' ??$user->email,
+            'user_type' ??$user->user_type
+        ]));
 
         return response()->json([
             'status' => 'success',
@@ -104,6 +109,24 @@ class AdminController extends Controller{
             'course' => $course,
         ]);
             
+    }
+
+    function updateCourse(Request $request){
+    
+        $course = Course::find($request->course_id);
+
+        $course->update([
+            'course_name' => $request->course_name?? $course->course_name,
+            'description' => $request->description ?? $course->description,
+            'enrollment_limit' => $request->enrollment_limit?? $course->enrollment_limit,
+            'sessions_number' => $request->sessions_number?? $course->sessions_number,
+            'meeting_link' => $request->meeting_link?? $course->meeting_link,
+        ]);
+
+        return response()->json([
+            'message' => 'Course updated successfully',
+            'course' => $course,
+        ]);
     }
     
 }
