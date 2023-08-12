@@ -13,7 +13,15 @@ class StudentController extends Controller
 {
     function getAllCourses() {
         try {
-        $courses = Course::all();
+            $auth_user = Auth::user();
+
+            if (!$auth_user) {
+                return response()->json(['error' => 'User is not authenticated.'], 401);
+            }
+
+            $enrolledCoursesIds = $auth_user->courses()->pluck('courses.id')->toArray();
+
+            $courses = Course::whereNotIn('id', $enrolledCoursesIds)->get();
 
         return response()->json([
             "status" => "success",
