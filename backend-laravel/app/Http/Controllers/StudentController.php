@@ -15,21 +15,10 @@ class StudentController extends Controller
         try {
         $courses = Course::all();
 
-        $courseArray = [];
-
-        foreach ($courses as $course) {
-            $courseArray[] = [
-                'id' => $course->id,
-                'name' => $course->course_name,
-                'description' => $course->description,
-                'limit' => $course->limit,
-                'teacher_id' => $course->teacher_id,
-                'meeting_link' => $course->meeting_link,
-                'sessions_number' => $course->sessions_number
-            ];
-        }
-
-        return response()->json(['courses' => $courseArray]);
+        return response()->json([
+            "status" => "success",
+            "data" => $courses
+        ]);
         } catch (Exception $e) {
         return response()->json(['error' => 'An error occurred while fetching courses.'], 500);
         }
@@ -92,6 +81,21 @@ class StudentController extends Controller
     }
 
     function getEnrolledCourses() {
+        try {
+            $auth_user = Auth::user();
 
+            if (!$auth_user) {
+                return response()->json(['error' => 'User is not authenticated.'], 401);
+            }
+
+            $classes_enrolled = $auth_user->courses()->with("teacher")->get();
+
+            return response()->json([
+                "status" => "success",
+                "data" => $classes_enrolled
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while fetching enrolled courses.'], 500);
+        }
     }
 }

@@ -11,7 +11,7 @@ class Course extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'TeacherID');
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 
     public function enrollments()
@@ -28,5 +28,6 @@ class Course extends Model
     {
         return $this->hasMany(Assignment::class, 'CourseID');
     }
+
 
 }
