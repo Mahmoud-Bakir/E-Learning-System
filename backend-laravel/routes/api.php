@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 Route::group(["prefix" => "Admin"], function(){
 
@@ -26,6 +27,7 @@ Route::group(["prefix" => "Admin"], function(){
 
 
  Route::group(["prefix" => "Teacher"], function(){
+  Route::post("/create_assignment", [TeacherController::class, "createAssignment"]);
  });
 
 
