@@ -54,14 +54,16 @@ class TeacherController extends Controller
       "courses" => $courses,
       ], 200);
   }
-  function getCourseAssignments(Request $request){
+  function getCourseElements(Request $request){
     $auth_user = Auth::user();
     $course_id = $request->course_id;
     $course = Course::find($course_id);
     $assignments = $course->assignments()->get();
+    $materials= $course->materials()->get();
     return response()->json([
       "message" => "success",
       "assignments" => $assignments,
+      "materials" => $materials,
       ], 200);
   }
 }
