@@ -6,7 +6,7 @@ import "./styles/colors.css";
 import Authentication from "./pages/Authentication";
 import Admin from "./pages/Admin";
 import Teacher from "./pages/Teacher";
-import Parent from "./pages/Parent";
+import Parent from "./pages/Parent/Parent Landing";
 import Student from "./pages/Student";
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Authentication />} />
+          {/* <Route path="/" element={<Authentication />} /> */}
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Teacher" element={<Teacher/>} />
-          <Route path="/Parent" element={<Parent />} />
+          <Route path="/" element={<Parent/>} />
           <Route path="/Student" element={<Student />} />
         </Routes>
       </BrowserRouter>
