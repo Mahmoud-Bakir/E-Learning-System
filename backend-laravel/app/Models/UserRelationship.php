@@ -16,4 +16,15 @@ class UserRelationship extends Model
     public function relatedUser(){
         return $this->belongsTo(User::class, 'related_user_id', 'id');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(User::class, 'parent_id', 'id');
+    }
+
+    public function child()
+    {
+        return $this->belongsTo(User::class, 'child_id', 'id');
+    }
+
 }
