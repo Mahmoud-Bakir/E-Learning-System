@@ -173,5 +173,42 @@ class AdminController extends Controller{
         ]);
     }
 
+    function getCourseStudentsAnalytics(Request $request){
+        $course_id = $request->course_id; 
+        $course = Course::find($course_id);
+        if (!$course) {return response()->json(['message' => 'Course not found',], 404);}
+
+        $enrollments = StudentEnrollment::where('course_id', $course_id)->get();
+
+        $analytics = [];
+
+        foreach ($enrollments as $enrollment) {
+            $student_id = $enrollment->student_id;
+            $student = User::find($student_id);
+
+            $attendance = $enrollment->attendance;
+            $progress = $enrollment->progress;
+
+            $assignments = Submission::where('student_id', $student_id)
+                ->whereIn('assignment_id', function ($query) use ($course_id) {
+                    $query->select('id')->from('assignments')->where('course_id', $course_id);
+                })->get();
+
+            $averageGrade = $assignments->avg('grade');
+
+            $analytics[] = [
+                'student' => $student,
+                'attendance' => $attendance,
+                'progress' => $progress,
+                'average_grade' => $averageGrade,
+            ];
+        }
+
+        return response()->json([
+            'course' => $course,
+            'student_analytics' => $analytics,
+        ]);
+    }
+
 
 }
