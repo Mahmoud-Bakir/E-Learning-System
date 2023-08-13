@@ -8,12 +8,23 @@ use App\Models\Course;
 use App\Models\CourseMaterial;
 use App\Models\User;
 use App\Models\StudentEnrollment;
+use App\Models\Assignment;
+use App\Models\Submission;
 
-class StudentController extends Controller
-{
+
+class StudentController extends Controller {
+
     function getAllCourses() {
         try {
-        $courses = Course::all();
+            $auth_user = Auth::user();
+
+            if (!$auth_user) {
+                return response()->json(['error' => 'User is not authenticated.'], 401);
+            }
+
+            $enrolledCoursesIds = $auth_user->courses()->pluck('courses.id')->toArray();
+
+            $courses = Course::whereNotIn('id', $enrolledCoursesIds)->get();
 
         return response()->json([
             "status" => "success",
@@ -24,29 +35,13 @@ class StudentController extends Controller
         }
     }
 
-    function fetchCourseMaterials(Request $request) {
-
-        $course_id = $request->course_id;
-        $course = Course::find($course_id);
-
-        if (!$course) {
-            return response()->json(['error' => 'Course not found.'], 404);
-        }
-
-        $courseMaterials = CourseMaterial::where('course_id', $course_id)->get();
-
-        return response()->json(['courseMaterials' => $courseMaterials]);
-
-    }
-
     function enrollUserInCourse(Request $request) {
 
         $request->validate([
-            'userId' => 'required|exists:users,id,user_type,student',
-            'courseId' => 'required|exists:courses,id',
+            'course_id' => 'required|exists:courses,id',
         ]);
 
-        $userId = $request->user_id;
+        $userId = Auth::id();
         $courseId = $request->course_id;
 
         $user = User::find($userId);
@@ -60,24 +55,18 @@ class StudentController extends Controller
             return response()->json(['error' => 'User is already enrolled in this course.'], 409);
         }
 
-        $user->courses()->attach($courseId);
+        $user->courses()->attach($courseId, [
+            'enrollment_date'=> now(),
+            'attendance' => 0,
+            'progress' => 0.
+            ]);
 
-        return response()->json(['message' => 'Enrollment successful.'], 200);
-    }
+            $classes_enrolled = $user->courses()->where('course_id', $courseId)->with('teacher')->first();;
 
-    function getUserProgress($userId) {
-
-        $user = User::where('id', $userId)
-                    ->where('user_type', 2)
-                    ->first();
-
-        if (!$user) {
-            return response()->json(['data' => ['error' => 'Student not found.']], 404);
-        }
-
-        $enrollments = StudentEnrollment::where('student_id', $userId)->get();
-
-        return response()->json(['data' => ['progress' => $enrollments]]);
+        return response()->json([
+            "message" => "Enrollment successful.",
+            "class enrolled" => $classes_enrolled,
+            ], 200);
     }
 
     function getEnrolledCourses() {
@@ -97,5 +86,87 @@ class StudentController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching enrolled courses.'], 500);
         }
+    }
+
+    function getCourseAssignments(Request $request) {
+        $auth_user = Auth::user();
+
+            if (!$auth_user) {
+                return response()->json(['error' => 'User is not authenticated.'], 401);
+            }
+
+            $request->validate([
+                'course_id' => 'required|exists:courses,id',
+            ]);
+
+            $courseId = $request->course_id;
+
+            $course = Course::find($courseId);
+
+            if (!$course) {
+                return response()->json(['error' => 'Course not found.'], 404);
+            }
+
+            $class_assignments = $course->assignments()->with('submissions')->get();
+
+            return response()->json([
+                "message" => "Success.",
+                "class assignments" => $class_assignments,
+                ], 200);
+    }
+
+    public function submitAssignment(Request $request) {
+        $request->validate([
+            'assignment_id' => 'required|exists:assignments,id',
+            'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $userId = Auth::id();
+        $assignmentId = $request->assignment_id;
+        $filePath = $request->Filepath;
+
+        $submission = new Submission([
+            'student_id' => $userId,
+            'assignment_id' => $assignmentId,
+            'Filepath' => $filePath,
+            'grade' => null,
+        ]);
+
+        $submission->save();
+
+        return response()->json([
+            'message' => 'Assignment submitted successfully.',
+        ], 200);
+    }
+
+    function fetchCourseMaterials(Request $request) {
+
+        $course_id = $request->course_id;
+        $course = Course::find($course_id);
+
+        if (!$course) {
+            return response()->json(['error' => 'Course not found.'], 404);
+        }
+
+        $courseMaterials = CourseMaterial::where('course_id', $course_id)->get();
+
+        return response()->json(['courseMaterials' => $courseMaterials]);
+
+    }
+
+
+    function getUserProgress($userId) {
+
+        $user = User::where('id', $userId)
+                    ->where('user_type', 2)
+                    ->first();
+
+        if (!$user) {
+            return response()->json(['data' => ['error' => 'Student not found.']], 404);
+        }
+
+        $enrollments = StudentEnrollment::where('student_id', $userId)->get();
+
+        return response()->json(['data' => ['progress' => $enrollments]]);
     }
 }

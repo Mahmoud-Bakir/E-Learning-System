@@ -11,11 +11,11 @@ class Assignment extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'CourseID');
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     public function submissions()
     {
-        return $this->hasMany(Submission::class, 'AssignmentID');
+        return $this->hasMany(Submission::class, 'assignment_id');
     }
 }
