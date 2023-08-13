@@ -19,7 +19,7 @@ class StudentController extends Controller
             "status" => "success",
             "data" => $courses
         ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         return response()->json(['error' => 'An error occurred while fetching courses.'], 500);
         }
     }
