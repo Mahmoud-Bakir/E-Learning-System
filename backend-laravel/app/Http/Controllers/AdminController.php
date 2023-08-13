@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\StudentEnrollment;
+use App\Models\Submission;
 
 
 class AdminController extends Controller{
@@ -30,7 +32,12 @@ class AdminController extends Controller{
         $user = User::find($user_id);
         if(!$user){return response() -> json(['Error' => 'No user found'],404);}
 
-        $user->update($request->only(['first_name', 'last_name', 'email', 'user_type']));
+        $user->update($request->only([
+            'first_name' ??$user->first_name,
+            'last_name' ??$user->last_name,
+            'email' ??$user->email,
+            'user_type' ??$user->user_type
+        ]));
 
         return response()->json([
             'status' => 'success',
@@ -105,5 +112,140 @@ class AdminController extends Controller{
         ]);
             
     }
+
+    function updateCourse(Request $request){
     
+        $course = Course::find($request->course_id);
+        if(!$course){return response() -> json(['Error' => 'No course found'],404);}
+
+
+        $course->update([
+            'course_name' => $request->course_name?? $course->course_name,
+            'description' => $request->description ?? $course->description,
+            'enrollment_limit' => $request->enrollment_limit?? $course->enrollment_limit,
+            'sessions_number' => $request->sessions_number?? $course->sessions_number,
+            'meeting_link' => $request->meeting_link?? $course->meeting_link,
+        ]);
+
+        return response()->json([
+            'message' => 'Course updated successfully',
+            'course' => $course,
+        ]);
+    }
+
+    function deleteCourse(Request $request){
+        $course = Course::find($request->course_id);
+        if(!$course){return response() -> json(['Error' => 'No course found'],404);}
+
+        $course->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User course deleted successfully',
+        ]);
+    }
+
+    function getAllCoursesAnalytics(Request $request){
+        $courses = Course::all();
+
+        $analytics = [];
+
+        foreach ($courses as $course) {
+            $course_id = $course->id;
+
+            $averageAttendance = StudentEnrollment::where('course_id', $course_id)->avg('attendance');
+            $averageProgress = StudentEnrollment::where('course_id', $course_id)->avg('progress');
+            $enrollmentCount = StudentEnrollment::where('course_id', $course_id)->count();
+            $averageGrade = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
+                ->where('assignments.course_id', $course_id)->avg('submissions.grade');
+
+            $analytics[$course_id] = [
+                'course' => $course,
+                'enrollment_count' => $enrollmentCount,
+                'average_attendance' => $averageAttendance,
+                'average_progress' => $averageProgress,
+                'average_grade' => $averageGrade,
+            ];
+        }
+
+        return response()->json([
+            'analytics' => $analytics,
+        ]);
+    }
+
+    function getCourseStudentsAnalytics(Request $request){
+        $course_id = $request->course_id; 
+        $course = Course::find($course_id);
+        if (!$course) {return response()->json(['message' => 'Course not found',], 404);}
+
+        $enrollments = StudentEnrollment::where('course_id', $course_id)->get();
+
+        $analytics = [];
+
+        foreach ($enrollments as $enrollment) {
+            $student_id = $enrollment->student_id;
+            $student = User::find($student_id);
+
+            $attendance = $enrollment->attendance;
+            $progress = $enrollment->progress;
+
+            $assignments = Submission::where('student_id', $student_id)
+                ->whereIn('assignment_id', function ($query) use ($course_id) {
+                    $query->select('id')->from('assignments')->where('course_id', $course_id);
+                })->get();
+
+            $averageGrade = $assignments->avg('grade');
+
+            $analytics[] = [
+                'student' => $student,
+                'attendance' => $attendance,
+                'progress' => $progress,
+                'average_grade' => $averageGrade,
+            ];
+        }
+
+        return response()->json([
+            'course' => $course,
+            'student_analytics' => $analytics,
+        ]);
+    }
+
+    function getStudentCoursesAnalytics(Request $request){
+        $student_id = $request->student_id;
+        $student = User::find($student_id);
+
+        if (!$student) { return response()->json([ 'message' => 'Student not found',], 404);}
+
+        $enrollments = StudentEnrollment::where('student_id', $student_id)->get();
+
+        $analytics = [];
+
+        foreach ($enrollments as $enrollment) {
+            $course_id = $enrollment->course_id;
+            $course = Course::find($course_id);
+
+            $attendance = $enrollment->attendance;
+            $progress = $enrollment->progress;
+
+            $submissionDetails = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
+                ->where('submissions.student_id', $student_id)
+                ->where('assignments.course_id', $course_id)
+                ->select('assignments.title as assignment_title', 'submissions.grade')
+                ->get();
+
+            $analytics[] = [
+                'course' => $course,
+                'attendance' => $attendance,
+                'progress' => $progress,
+                'submissions' => $submissionDetails,
+            ];
+        }
+
+        return response()->json([
+            'student' => $student,
+            'course_analytics' => $analytics,
+        ]);
+    }
+
+
 }

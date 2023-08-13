@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
-
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     public function submissions()
     {
-        return $this->hasMany(Submission::class, 'assignment_id');
+        return $this->hasMany(Submission::class, 'assignment_id', 'id');
     }
 }
