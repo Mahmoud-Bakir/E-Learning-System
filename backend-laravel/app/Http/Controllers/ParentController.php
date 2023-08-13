@@ -86,7 +86,6 @@ class ParentController extends Controller {
                         $assignmentData = [
                             'id' => $assignment->id,
                             'title' => $assignment->title,
-                            'average_grade' => $averageGrade,
                             'submissions' => $submissionData,
                         ];
 
