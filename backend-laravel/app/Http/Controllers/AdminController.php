@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\StudentEnrollment;
+use App\Models\Submission;
 
 
 class AdminController extends Controller{
@@ -142,5 +144,34 @@ class AdminController extends Controller{
             'message' => 'User course deleted successfully',
         ]);
     }
-    
+
+    function getAllCoursesAnalytics(Request $request){
+        $courses = Course::all();
+
+        $analytics = [];
+
+        foreach ($courses as $course) {
+            $course_id = $course->id;
+
+            $averageAttendance = StudentEnrollment::where('course_id', $course_id)->avg('attendance');
+            $averageProgress = StudentEnrollment::where('course_id', $course_id)->avg('progress');
+            $enrollmentCount = StudentEnrollment::where('course_id', $course_id)->count();
+            $averageGrade = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
+                ->where('assignments.course_id', $course_id)->avg('submissions.grade');
+
+            $analytics[$course_id] = [
+                'course' => $course,
+                'enrollment_count' => $enrollmentCount,
+                'average_attendance' => $averageAttendance,
+                'average_progress' => $averageProgress,
+                'average_grade' => $averageGrade,
+            ];
+        }
+
+        return response()->json([
+            'analytics' => $analytics,
+        ]);
+    }
+
+
 }
