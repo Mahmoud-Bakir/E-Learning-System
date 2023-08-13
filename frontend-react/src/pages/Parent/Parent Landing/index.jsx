@@ -1,10 +1,12 @@
 import React from 'react'
 import DisplayList from '../../../Components/DisplayList/index'
+import DataCard from '../../../Components/DataCard'
 
 function Parent() {
   return (
-    <div>
+    <div className='flex'>
       <DisplayList/>
+      <DataCard/>
     </div>
   )
 }

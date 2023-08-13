@@ -1,0 +1,17 @@
+.datacard-container {
+  width: 1000px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease;
+  gap: 10%;
+}
+
+.datacard-container:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.chart-container {
+  width: 200px;
+  height: 180px;
+}
