@@ -210,5 +210,42 @@ class AdminController extends Controller{
         ]);
     }
 
+    function getStudentCoursesAnalytics(Request $request){
+        $student_id = $request->student_id;
+        $student = User::find($student_id);
+
+        if (!$student) { return response()->json([ 'message' => 'Student not found',], 404);}
+
+        $enrollments = StudentEnrollment::where('student_id', $student_id)->get();
+
+        $analytics = [];
+
+        foreach ($enrollments as $enrollment) {
+            $course_id = $enrollment->course_id;
+            $course = Course::find($course_id);
+
+            $attendance = $enrollment->attendance;
+            $progress = $enrollment->progress;
+
+            $submissionDetails = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
+                ->where('submissions.student_id', $student_id)
+                ->where('assignments.course_id', $course_id)
+                ->select('assignments.title as assignment_title', 'submissions.grade')
+                ->get();
+
+            $analytics[] = [
+                'course' => $course,
+                'attendance' => $attendance,
+                'progress' => $progress,
+                'submissions' => $submissionDetails,
+            ];
+        }
+
+        return response()->json([
+            'student' => $student,
+            'course_analytics' => $analytics,
+        ]);
+    }
+
 
 }
