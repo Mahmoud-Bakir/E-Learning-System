@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Assignment;
+use App\Models\CourseMaterial;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -28,6 +29,20 @@ class TeacherController extends Controller
     return response()->json([
         "message" => "assignment created.",
         "assignment" => $assignment,
+        ], 200);
+  }
+  function createMaterial(Request $request) {
+    $course_name= $request->course_name;
+    $course_id = Course::where("course_name",$course_name)->first();
+    $material = new CourseMaterial();
+    $material->course_id = $course_id->id;
+    $material->title = $request->title;
+    $material->description = $request->description;
+    $material->file_URL = $request->file_URL;
+    $material->save();
+    return response()->json([
+        "message" => "material created.",
+        "assignment" => $material,
         ], 200);
   }
 
