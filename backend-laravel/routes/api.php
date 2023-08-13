@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ParentController;
+use App\Http\Controllers\StudentController;
 
 Route::group(["prefix" => "Admin"], function(){
 
@@ -29,11 +31,17 @@ Route::group(["prefix" => "Admin"], function(){
 
 
  Route::group(["prefix" => "Parent"], function(){
+   Route::post("/get_all_children_Data", [ParentController::class, "getAllChildrenData"]);
  });
 
 
 
  Route::group(["prefix" => "Student"], function(){
+    Route::get("/get_all_courses", [StudentController::class, "getAllCourses"]);
+    Route::get("/get_all_enrolled_courses", [StudentController::class, "getEnrolledCourses"]);
+    Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
+    Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
+    Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
  });
 
 

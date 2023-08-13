@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CourseMaterial extends Model
 {
     use HasFactory;
-
+    //Edited By Sally
     public function course(){
-        return $this->belongsTo(Course::class, 'CourseID');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

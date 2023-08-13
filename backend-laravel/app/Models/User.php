@@ -16,6 +16,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
+
+    protected $appends = ['FullName'];
     protected $fillable = [
         'first_name',
         'last_name',
@@ -68,8 +70,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function parentRelationships()
+     //Edited By Sally (, 'id')
     {
-        return $this->hasMany(UserRelationship::class, 'parent_id');
+        return $this->hasMany(UserRelationship::class, 'parent_id', 'id');
     }
 
     public function childRelationships()
@@ -77,7 +80,33 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserRelationship::class, 'child_id');
     }
 
+
+    public function courses(){
+        return $this->belongsToMany(Course::class, 'student_enrollments', 'student_id', 'course_id')
+                    ->withPivot('enrollment_date', 'attendance', 'progress');
+    }
+
+    //Added By Sally
+
+    public function getFullNameAttribute() {
+        return implode(" ", [$this->first_name, $this->last_name]);
+
+        //$assg = Assignment::all()->pluck("grade")
+    }
+
+    public function children()
+    {
+        return $this->hasManyThrough(User::class, UserRelationship::class, 'parent_id', 'id', 'id', 'child_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(StudentEnrollment::class, 'student_id', 'id');
+    }
+
+
+    //Added By Sally
 }
-    
-    
+
+
 
