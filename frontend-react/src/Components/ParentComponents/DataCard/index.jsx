@@ -5,7 +5,7 @@ import CardChart from '../DataCard Chart'
 
 function DataCard() {
   return (  
-    <div className='datacard-container flex center fullwidth'>
+    <div className='datacard-container flex center fullwidth pointer'>
       <div className="class-info-container">
         <h3>class_name</h3>
         <h4>class_description</h4>

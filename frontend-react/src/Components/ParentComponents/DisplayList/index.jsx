@@ -1,15 +1,15 @@
 import React from 'react'
 import './styles.css'
 
-import profileUser from '../../assets/profile-user.png'
+import profileUser from '../../../assets/profile-user.png'
 
 function DisplayList() {
   return (
     <div className='list-main-container flex column fullwidth'>
-      <div className='fullwidth'>
+      <div className='list-header'>
         <h2>List of Children</h2>
       </div>
-    <div className="list-container flex">
+    <div className="list-container flex center">
       <ul className='fullwidth'>
         <div className='flex pointer '>
         <img src={profileUser} alt="Profile User" />
