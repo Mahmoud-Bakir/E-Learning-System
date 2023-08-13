@@ -31,7 +31,7 @@ Route::group(["prefix" => "Admin"], function(){
 
 
  Route::group(["prefix" => "Parent"], function(){
-   Route::post("/get_all_children_Data", [ParentController::class, "getAllChildrenData"]);
+   Route::get("/get_all_children_Data", [ParentController::class, "getAllChildrenData"]);
  });
 
 

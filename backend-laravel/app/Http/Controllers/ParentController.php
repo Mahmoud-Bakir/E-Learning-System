@@ -9,11 +9,16 @@ use App\Models\CourseMaterial;
 use App\Models\User;
 use App\Models\StudentEnrollment;
 
-class ParentController extends Controller
-{
-    function getAllChildrenData(Request $request) {
-        $userId = $request->user_id;
+class ParentController extends Controller {
+    
+    function getAllChildrenData() {
+        $auth_user = Auth::user();
+        if (!$auth_user) {
+            return response()->json(['error' => 'User is not authenticated.'], 401);
+        }
+        $userId = Auth::id();
         $parent = User::find($userId);
+
         if ($parent) {
             $children = $parent->children()->select('users.id', 'users.first_name','users.last_name')->get();
         }
