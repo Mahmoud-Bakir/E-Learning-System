@@ -28,6 +28,7 @@ Route::group(["prefix" => "Admin"], function(){
 
  Route::group(["prefix" => "Teacher"], function(){
   Route::post("/create_assignment", [TeacherController::class, "createAssignment"]);
+  Route::get("/get_classes", [TeacherController::class, "getClasses"]);
  });
 
 

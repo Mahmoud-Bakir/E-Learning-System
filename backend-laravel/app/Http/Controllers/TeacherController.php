@@ -16,10 +16,6 @@ class TeacherController extends Controller
 {
 
    function createAssignment(Request $request) {
-    $validator = Validator::make($request->all(), [
-      'due_date' => 'required|date_format:Y-m-d'
-  ]);
-
     $course_name= $request->course_name;
     $course_id = Course::where("course_name",$course_name)->first();
     $assignment = new Assignment();
@@ -29,12 +25,18 @@ class TeacherController extends Controller
     $assignment->total_grade = $request->total_grade;
     $assignment->course_id = $course_id->id;
     $assignment->save();
-    
-   
-
     return response()->json([
         "message" => "assignment created.",
         "assignment" => $assignment,
         ], 200);
+  }
+
+  function getClasses(){
+    $auth_user = Auth::user();
+    $courses = $auth_user->teacherCourses()->get();
+    return response()->json([
+      "message" => "success",
+      "courses" => $courses,
+      ], 200);
   }
 }
