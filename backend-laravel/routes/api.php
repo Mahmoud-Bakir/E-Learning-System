@@ -9,11 +9,18 @@ use App\Http\Controllers\StudentController;
 
 Route::group(["prefix" => "Admin"], function(){
 
-  Route::post("/createuser", [AuthController::class, "signUp"]);
-  Route::post("/updateuser", [AdminController::class, "updateUser"]);
-  Route::post("/deleteuser", [AdminController::class, "deleteUser"]);
+  Route::post("/create_user", [AuthController::class, "signUp"]);
+  Route::post("/update_user", [AdminController::class, "updateUser"]);
+  Route::post("/delete_user", [AdminController::class, "deleteUser"]);
 
-  Route::post("/createcourse", [AdminController::class, "createClass"]);
+  Route::post("/create_course", [AdminController::class, "createClass"]);
+  Route::post("/update_course", [AdminController::class, "updateCourse"]);
+  Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
+
+  Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
+  Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
+  Route::post("/student_analytics", [AdminController::class, "getStudentCoursesAnalytics"]);
+
  });
 
 
