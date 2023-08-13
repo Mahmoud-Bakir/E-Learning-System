@@ -73,8 +73,8 @@ class CreateCoursesTable extends Migration
             $table->string('Filepath')->nullable();
             $table->decimal('grade', 5, 2)->nullable();
             
-            $table->foreign('student_id')->references('ID')->on('student_enrollments');
-            $table->foreign('assignment_id')->references('ID')->on('assignments');
+            $table->foreign('student_id')->references('student_id')->on('student_enrollments');
+            $table->foreign('assignment_id')->references('id')->on('assignments');
         });
     }
 
