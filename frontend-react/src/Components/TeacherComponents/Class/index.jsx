@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import MyResponsivePie from '../../Common/PieChart';
+import Notification from '../../Common/Notification';
+
 
 function Class() {
 
-
   const data =[ 
     {
-      "id": "ruby",
-      "label": "ruby",
+      "id": "Attendence",
+      "label": "Attendence",
       "value": 470,
       "color": "hsl(107, 70%, 50%)"
     },
     {
-      "id": "haskell",
-      "label": "haskell",
+      "id": "Grade",
+      "label": "Grade",
       "value": 296,
       "color": "hsl(168, 70%, 50%)"
     },
@@ -26,14 +27,14 @@ function Class() {
       <div className='Left-content'>
         <div className='MyResponsivePie'>
           <MyResponsivePie  data={data}/>
-        </div>
-        <div className='MyResponsivePie'>
-          <MyResponsivePie  data={data}/>
+          
         </div>
       </div>
  
       <div className='right-content'>
-        0
+        <Notification title="Math" type="Matrial" />
+        <Notification title="Math" due="14-May" type="assignment" />
+        <Notification title="Math" type="Matrial" />
       </div>
 
     </div>
