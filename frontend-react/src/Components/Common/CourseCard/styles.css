@@ -1,0 +1,24 @@
+.course-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    min-height: 300px;
+    grid-row-gap: 10px;
+    border: 2px solid black ;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: blue;
+}
+
+h3 { 
+    padding: 0;
+    margin: 0;
+}
+
+.course-image{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
