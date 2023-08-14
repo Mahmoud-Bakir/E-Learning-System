@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 Route::group(["prefix" => "Admin"], function(){
 
@@ -26,6 +27,13 @@ Route::group(["prefix" => "Admin"], function(){
 
 
  Route::group(["prefix" => "Teacher"], function(){
+  Route::post("/create_assignment", [TeacherController::class, "createAssignment"]);
+  Route::get("/courses", [TeacherController::class, "getClasses"]);
+  Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
+  Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
+  Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
+
+  
  });
 
 
@@ -42,6 +50,7 @@ Route::group(["prefix" => "Admin"], function(){
     Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
     Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
     Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
+  
  });
 
 

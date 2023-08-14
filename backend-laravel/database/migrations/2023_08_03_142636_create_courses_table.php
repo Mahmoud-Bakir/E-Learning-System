@@ -9,26 +9,29 @@ class CreateCoursesTable extends Migration
 {
     public function up()
     {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('category')->unique();
+            $table->timestamps();
+        });
+
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('teacher_id'); // The foreign key to users table
             $table->string('course_name');
             $table->text('description')->nullable();
-            $table->string('category_id');
+            $table->unsignedBigInteger('category_id');
             $table->integer('enrollment_limit')->nullable();
             $table->integer('sessions_number')->nullable();
             $table->string('meeting_link');
             $table->timestamps();
 
             $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
 
         });
 
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('category')->unique();
-            $table->timestamps();
-        });
+     
 
         Schema::create('student_enrollments', function (Blueprint $table) {
             $table->id();
