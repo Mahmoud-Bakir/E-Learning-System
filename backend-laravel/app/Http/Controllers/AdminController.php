@@ -154,16 +154,14 @@ class AdminController extends Controller{
             $course_id = $course->id;
 
             $averageAttendance = StudentEnrollment::where('course_id', $course_id)->avg('attendance');
-            $averageProgress = StudentEnrollment::where('course_id', $course_id)->avg('progress');
             $enrollmentCount = StudentEnrollment::where('course_id', $course_id)->count();
             $averageGrade = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
                 ->where('assignments.course_id', $course_id)->avg('submissions.grade');
 
-            $analytics[$course_id] = [
+            $analytics[] = [
                 'course' => $course,
                 'enrollment_count' => $enrollmentCount,
                 'average_attendance' => $averageAttendance,
-                'average_progress' => $averageProgress,
                 'average_grade' => $averageGrade,
             ];
         }
@@ -176,7 +174,12 @@ class AdminController extends Controller{
     function getCourseStudentsAnalytics(Request $request){
         $course_id = $request->course_id; 
         $course = Course::find($course_id);
-        if (!$course) {return response()->json(['message' => 'Course not found',], 404);}
+
+        if (!$course) {
+            return response()->json([
+                'message' => 'Course not found',
+            ], 404);
+        }
 
         $enrollments = StudentEnrollment::where('course_id', $course_id)->get();
 
@@ -187,20 +190,17 @@ class AdminController extends Controller{
             $student = User::find($student_id);
 
             $attendance = $enrollment->attendance;
-            $progress = $enrollment->progress;
 
-            $assignments = Submission::where('student_id', $student_id)
-                ->whereIn('assignment_id', function ($query) use ($course_id) {
-                    $query->select('id')->from('assignments')->where('course_id', $course_id);
-                })->get();
-
-            $averageGrade = $assignments->avg('grade');
+            $assignments = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
+                ->where('submissions.student_id', $student_id)
+                ->where('assignments.course_id', $course_id)
+                ->select('assignments.title as assignment_title', 'submissions.grade')
+                ->get();
 
             $analytics[] = [
                 'student' => $student,
                 'attendance' => $attendance,
-                'progress' => $progress,
-                'average_grade' => $averageGrade,
+                'assignments' => $assignments,
             ];
         }
 
@@ -225,7 +225,6 @@ class AdminController extends Controller{
             $course = Course::find($course_id);
 
             $attendance = $enrollment->attendance;
-            $progress = $enrollment->progress;
 
             $submissionDetails = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')
                 ->where('submissions.student_id', $student_id)
@@ -236,7 +235,6 @@ class AdminController extends Controller{
             $analytics[] = [
                 'course' => $course,
                 'attendance' => $attendance,
-                'progress' => $progress,
                 'submissions' => $submissionDetails,
             ];
         }
@@ -246,6 +244,5 @@ class AdminController extends Controller{
             'course_analytics' => $analytics,
         ]);
     }
-
 
 }
