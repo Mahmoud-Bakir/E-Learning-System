@@ -39,7 +39,6 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_id'); // The foreign key to courses table
             $table->date('enrollment_date');
             $table->integer('attendance')->default(0);;
-            $table->integer('progress')->default(0);
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('users');
