@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './styles.css'
 import Tabs from '../../../Components/ParentComponents/Tabs'
 import Chart from '../../../Components/ParentComponents/Chart'
+import AssignmentCard from '../../../Components/ParentComponents/AssignmentCard';
 
 
 function CourseInfo() {
@@ -34,7 +35,7 @@ function CourseInfo() {
     <div className='parent-container'>
     <Tabs onTabChanged={(value) => setFilter(value)}/>
     <div className='chart'><Chart data = {data}/></div>
-    
+    <AssignmentCard/>
     </div>
     
   )

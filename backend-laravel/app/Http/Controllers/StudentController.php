@@ -121,7 +121,7 @@ class StudentController extends Controller {
     public function submitAssignment(Request $request) {
         $request->validate([
             'assignment_id' => 'required|exists:assignments,id',
-            'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            // 'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         $userId = Auth::id();

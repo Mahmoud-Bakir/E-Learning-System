@@ -87,6 +87,7 @@ class ParentController extends Controller {
                         $assignmentData = [
                             'id' => $assignment->id,
                             'title' => $assignment->title,
+                            'description' => $assignment->description,
                             'submissions' => $submissionData,
                         ];
 
