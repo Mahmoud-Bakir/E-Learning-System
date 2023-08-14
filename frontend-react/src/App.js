@@ -14,10 +14,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Authentication />} /> */}
+          <Route path="/" element={<Authentication />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Teacher" element={<Teacher/>} />
-          <Route path="/" element={<Parent/>} />
+          <Route path="/Parent" element={<Parent/>} />
           <Route path="/Student" element={<Student />} />
         </Routes>
       </BrowserRouter>
