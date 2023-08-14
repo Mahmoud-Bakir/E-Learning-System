@@ -1,0 +1,49 @@
+.list-main-container {
+  width: 400px;
+  gap: 10px;
+  padding: 20px;
+}
+
+.list-main-container h1 {
+  text-align: center;
+}
+
+.list-header {
+  width: 300px;
+}
+
+.list-container {
+  width: 300px;
+  align-items: flex-start;
+  padding: 10px 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.list-container li {
+  list-style: none;
+}
+
+img {
+  width: 30px;
+  height: auto;
+}
+
+ul div {
+  width: 100%;
+  gap: 10px;
+  padding: 3%;
+  transition: box-shadow 0.3s ease;
+  align-items: center;
+}
+
+ul div:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+li {
+  /* font-size: 1.1rem; */
+  font-weight: bold;
+}
