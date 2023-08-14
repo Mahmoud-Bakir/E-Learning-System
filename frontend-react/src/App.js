@@ -6,7 +6,7 @@ import "./styles/colors.css";
 import Authentication from "./pages/Authentication";
 import Admin from "./pages/Admin";
 import Teacher from "./pages/Teacher";
-import Parent from "./pages/Parent/Course info";
+import Parent from "./pages/Parent/Landing";
 import Student from "./pages/Student";
 
 function App() {
