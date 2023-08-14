@@ -11,10 +11,10 @@ function Course({ course_id, setCourseId }) {
   return (
     <>
       <TitleHeader setCourseId={setCourseId} setClasstab={setClasstab} />
-      {classtab === 'Class' && <Class />}
-      {classtab === 'Announcement' && <Announcement />}
-      {classtab === 'Students' && <Students />}
-      {classtab === 'Assignment' && <Assignments />}
+      {classtab === 'Class' && <Class course_id={course_id} />}
+      {classtab === 'Announcement' && <Announcement course_id={course_id} />}
+      {classtab === 'Students' && <Students course_id={course_id} />}
+      {classtab === 'Assignment' && <Assignments course_id={course_id} />}
     </>
   );
 }
