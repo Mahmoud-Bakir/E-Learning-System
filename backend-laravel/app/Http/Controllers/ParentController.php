@@ -19,6 +19,7 @@ class ParentController extends Controller {
         }
         $userId = Auth::id();
         $parent = User::find($userId);
+        $childrenData = [];
 
 
         if ($parent) {
@@ -106,7 +107,7 @@ class ParentController extends Controller {
         return response()->json(['data' => ['children' => $childrenData]]);
 
     }
-    
+
 }
 
 

@@ -3,6 +3,7 @@ import './styles.css'
 import Tabs from '../../../Components/ParentComponents/Tabs'
 import Chart from '../../../Components/ParentComponents/Chart'
 
+
 function CourseInfo() {
 
   const [filter, setFilter] = useState("all");
@@ -26,7 +27,7 @@ function CourseInfo() {
       "Section": "Progress",
       "Progress": 42,
       "AverageColor": "hsl(30, 70%, 50%)",
-    },
+    }
   ]
   
   return (
