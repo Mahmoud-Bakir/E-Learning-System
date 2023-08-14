@@ -1,0 +1,33 @@
+.class-content{
+    display: flex;
+    height: 100vh;
+    justify-content: space-around;
+    background: lightblue;
+    margin: 50px;
+    flex-wrap: wrap-reverse;
+}
+
+.left-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0.25;
+    margin-top: 50px;
+    background: lightgray;
+}
+
+.right-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0.75;
+    margin-top: 50px;
+    background: lightgray;
+    min-width: 500px;
+} 
+
+.MyResponsivePie{
+    margin-top: 50px;
+    height: 200px;
+    width: 300px;
+}
