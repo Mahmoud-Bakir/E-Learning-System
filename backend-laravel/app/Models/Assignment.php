@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'description',
+        'due_date',
+        'total_grade',
+        'course_name',
+        'course_id',
+    
+    ];
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
