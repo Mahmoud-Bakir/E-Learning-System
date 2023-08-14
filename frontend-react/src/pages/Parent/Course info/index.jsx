@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './styles.css'
 import Tabs from '../../../Components/Parent/ParentComponents/Tabs'
 import Stream from '../../../Components/Parent/ParentStructure/Stream';
+import TeacherCommunication from '../../../Components/Parent/ParentStructure/TeacherCommunication';
 
 function CourseInfo() {
 
@@ -32,7 +33,9 @@ function CourseInfo() {
   return (
     <div className='parent-container'>
     <Tabs onTabChanged={(value) => setFilter(value)}/>
-    <Stream/>
+    {/* <Stream/> */}
+    <TeacherCommunication/>
+
     </div>
     
   )

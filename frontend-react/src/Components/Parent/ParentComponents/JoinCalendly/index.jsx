@@ -1,27 +1,27 @@
 import React from 'react';
 import './styles.css';
 
-import MeetLogo from "../../../../assets/logo_meet.png"
+import CalendarLogo from "../../../../assets/google-calendar.png"
 
-const JoinMeet = () => {
+const JoinCalendly = () => {
     return (
         <div className="google-meet">
             <div className="google-meet-top">
                 <div>
                     <div className="google-meet-logo">
                         <img
-                            src={MeetLogo}
-                            alt="Google Meet"
+                            src={CalendarLogo}
+                            alt="Google Calendar"
                         />
                     </div>
-                    <div>Meet</div>
+                    <div>Google Calendar</div>
                 </div>
             </div>
             <div>
-                <button>Join</button>
+                <button>Book A Meeting</button>
             </div>
         </div>
     );
 }
 
-export default JoinMeet;
+export default JoinCalendly;
