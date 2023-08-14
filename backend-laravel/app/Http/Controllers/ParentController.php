@@ -19,7 +19,7 @@ class ParentController extends Controller {
         }
         $userId = Auth::id();
         $parent = User::find($userId);
-
+        $childrenData = [];
 
         if ($parent) {
             $children = $parent->children()->select('users.id', 'users.first_name', 'users.last_name')->get();
@@ -48,7 +48,6 @@ class ParentController extends Controller {
                             'id' => $teacher->id,
                             'full_name' => $child->first_name . ' ' . $child->last_name,
                         ],
-                        // 'pivot' => $class->pivot,
                         'materials' => [],
                         'assignments' => [],
                         'average_class_grade' => 0,
