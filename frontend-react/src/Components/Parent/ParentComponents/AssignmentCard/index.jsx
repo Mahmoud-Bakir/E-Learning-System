@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.css'
 
-import assignmentIcon from '../../../assets/list.png'
+import assignmentIcon from '../../../../assets/list.png'
 
 const AssignmentCard = () => {
     return (
-        <div className='assignment-card-container flex column '>
+        <div className='assignment-card-container flex column fullwidth'>
             <div className='flex'>
                 <div>
                 <img src={assignmentIcon} alt="Assignment Icon" />

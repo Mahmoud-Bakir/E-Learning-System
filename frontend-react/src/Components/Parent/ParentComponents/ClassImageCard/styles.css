@@ -1,0 +1,16 @@
+.image-card-container {
+  height: 230px;
+  background-image: url("../../../../assets/classroom.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  text-align: left;
+  padding: 20px;
+  color: white;
+  margin-top: 20px;
+}
+
+.image-card-container div {
+  margin-top: auto;
+}
