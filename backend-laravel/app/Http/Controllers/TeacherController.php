@@ -56,7 +56,8 @@ class TeacherController extends Controller
   }
   function getCourseElements(Request $request){
     $auth_user = Auth::user();
-    $course_id = $request->course_id;
+    $course_name= $request->course_name;
+    $course_id = Course::where("course_name",$course_name)->first();
     $course = Course::find($course_id);
     $assignments = $course->assignments()->get();
     $materials= $course->materials()->get();
@@ -64,6 +65,15 @@ class TeacherController extends Controller
       "message" => "success",
       "assignments" => $assignments,
       "materials" => $materials,
+      ], 200);
+  }
+  function getAssignmentSubmissions(Request $request){
+    $auth_user = Auth::user();
+    $assignment = Assignment::find($request->assignment_id);
+    $submissions = $assignment->submissions()->get();
+    return response()->json([
+      "message" => "success",
+      "submission" => $submissions,
       ], 200);
   }
 }

@@ -31,6 +31,7 @@ Route::group(["prefix" => "Admin"], function(){
   Route::get("/courses", [TeacherController::class, "getClasses"]);
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
+  Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
 
   
  });
@@ -49,6 +50,7 @@ Route::group(["prefix" => "Admin"], function(){
     Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
     Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
     Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
+  
  });
 
 
