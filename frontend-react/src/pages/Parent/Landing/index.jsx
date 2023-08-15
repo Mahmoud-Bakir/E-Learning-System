@@ -9,13 +9,23 @@ import ClassImageCard from '../../../Components/Parent/ParentComponents/ClassIma
 import axios from "axios";
 import { sendRequest } from "../../../core/config/request";
 import { requestMethods } from "../../../core/enums/requestMethods";
+import { useNavigate } from "react-router-dom";
+
+import CourseInfo from '../../../pages/Parent/CourseInfo'
 
 
 function Parent() {
 
+  const navigation = useNavigate();
+
   const [childrenData, setChildrenData] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [selectedChildClasses, setSelectedChildClasses] = useState([]);
+
+  const [selectedCourseId, setselectedCourseId] = useState(null);
+  const [selectedCourseIndex, setselectedCourseIndex] = useState(null);
+  const [selectedCourse, setselectedCourse] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +40,9 @@ function Parent() {
 
       } catch (error) {
         console.log(error.response.status);
-
+        if (error.response.status === 401) {
+          navigation("/");
+        }
       }
     };
 
@@ -44,13 +56,28 @@ function Parent() {
     if (selectedChild) {
       
       setSelectedChildClasses(selectedChild.classes);
-      console.log(selectedChildClasses.submitions)
-                console.log(selectedChildClasses.assignmetns)
+ 
     } else {
       console.log("Selected Child not found.");
       setSelectedChildClasses([]);
     }
   };
+
+  const handleSelectedCourse = (courseId, index) => {
+    setselectedCourseId(courseId)
+    setselectedCourseIndex(index)
+
+    console.log('courseId ', selectedCourseId)
+    console.log('Index ', selectedCourseIndex)
+
+    console.log('ChildClass ', selectedChildClasses[index])
+    setselectedCourse(selectedChildClasses[index])
+    console.log('ChildClass 1 ',selectedCourse)
+
+    if(selectedCourseId && selectedCourseIndex){
+      navigation("")
+    }
+  }
 
   return (
   <div className="parent-navbar">
@@ -64,7 +91,7 @@ function Parent() {
         <DisplayList children = {childrenData} onSelectChild={handleSelectChild}/>
         <div className='fullwidth'>
           <TitleHeader/>
-          <DataCard childClasses={selectedChildClasses}/>
+          <DataCard childClasses={selectedChildClasses} onSelectClass = {handleSelectedCourse}/>
         </div>  
       </div>
     </div>

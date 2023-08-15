@@ -1,12 +1,17 @@
 import logo from '../../../../assets/logo.png'
 import logout from '../../../../assets/logout.svg'
-import message from '../../../../assets/message.svg'
-import settings from '../../../../assets/settings.svg'
 import "./style.css"
+import { useNavigate } from "react-router-dom";
+import { localStorageAction } from '../../../../core/config/localstorage'
 
+const NavBar = () => { 
+  const navigation = useNavigate();
+  
+  const firstName = localStorageAction("first_name");
+  const lastName = localStorageAction("last_name");
 
+  const welcomeMessage = firstName && lastName ? `Welcome ${firstName} ${lastName}` : "Welcome Parent";
 
-const AdminNav = () => {  
   return (
     
     <>
@@ -16,14 +21,19 @@ const AdminNav = () => {
         <img src={logo} alt="" className='logo' />
        </div>
        <div className='flex width-20 center gap-100'>
-         <span className='padding-20 pointer nav-tab'>Welcome Parent</span>
-         {/* <span className='padding-20 pointer nav-tab' >people</span> */}
+         <span className='padding-20 pointer nav-tab'>{welcomeMessage}</span>
         </div>
         <div className='flex width-20 center gap-30 icons-container'>
-         <span className='padding-20 pointer nav-tab'>Home</span>
-        {/* <img src={message} alt="" className='icon' />
-        <img src={settings} alt="" className='icon' /> */}
-        <img src={logout} alt="" className='icon' />
+         <span 
+         className='padding-20 pointer nav-tab' 
+         onClick={() => {
+          navigation("/Parent")
+         }}>
+         Home
+         </span>
+        <img src={logout} alt="" className='icon' onClick={() => {
+              localStorage.removeItem("access_token");
+              navigation("/");}}/>
         </div>
 
       </div>
@@ -32,4 +42,4 @@ const AdminNav = () => {
     </>
   )
 }
- export default AdminNav
+ export default NavBar

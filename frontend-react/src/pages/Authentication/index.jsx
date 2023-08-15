@@ -27,7 +27,11 @@ const SignIn = () => {
 
       if (data.message === 'User signin successfully') {
         console.log('Token:', data.token);
+        console.log(data);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('first_name', data.first_name);
+        localStorage.setItem('last_name', data.last_name);
+
         handleRole(data.user_type);
       } else {
         if (data.errors) {

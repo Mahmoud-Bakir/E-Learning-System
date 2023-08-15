@@ -3,31 +3,30 @@ import './styles.css'
 import CardChart from '../DataCard Chart'
 
 
-function DataCard({ childClasses }) {
+function DataCard({ childClasses, onSelectClass }) {
   return (
     <div>
       {childClasses.length === 0 ? (
-        <p>No classes available.</p>
+        <p>No classes available for this child.</p>
       ) : (
         childClasses.map((classInfo, index) => {
-          console.log('classinfp:', classInfo.assignments); 
+          console.log('classinfo:', classInfo); 
           return (
-            <div className='datacard-container flex center fullwidth' key={index}>
+            <div className='datacard-container flex center fullwidth pointer' key={classInfo.id} index = {index} onClick = {() => onSelectClass(classInfo.id, index)}>
               <div className="class-info-container">
                 <h3>{classInfo.course_name}</h3>
-                <h4>{classInfo.description}</h4>
               </div>
-              <div className="grade-container">
+              <div className="grade-container fullwidth">
                 <h3>{classInfo.average_class_grade}</h3>
               </div>
-              <div className="assignments-container">
+              <div className="assignments-container fullwidth">
                 <h3>
                   {Array.isArray(classInfo.submissions) ? classInfo.submissions.length : 0}
                   /
                   {Array.isArray(classInfo.assignments) ? classInfo.assignments.length : 0}
                 </h3>
               </div>
-              <div className='attendance-container'>
+              <div className='attendance-container fullwidth'>
                 <h3>{classInfo.attendance}/{classInfo.sessions_number}</h3>
               </div>
             </div>
