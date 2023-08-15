@@ -45,6 +45,8 @@ class ParentController extends Controller {
                         'course_name' => $class->course_name,
                         'description'=>$class->description,
                         'sessions_number'=>$class->sessions_number,
+                        'meeting_link' => $class->meeting_link,
+                        'calendly_link'=>$class->calendly_link,
                         'teacher' => [
                             'id' => $teacher->id,
                             'full_name' => $teacher->first_name . ' ' . $teacher->last_name,
