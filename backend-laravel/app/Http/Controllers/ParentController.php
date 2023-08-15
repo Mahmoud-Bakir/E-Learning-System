@@ -19,6 +19,7 @@ class ParentController extends Controller {
         }
         $userId = Auth::id();
         $parent = User::find($userId);
+        $childrenData = [];
 
 
         if ($parent) {
@@ -46,7 +47,7 @@ class ParentController extends Controller {
                         'sessions_number'=>$class->sessions_number,
                         'teacher' => [
                             'id' => $teacher->id,
-                            'full_name' => $child->first_name . ' ' . $child->last_name,
+                            'full_name' => $teacher->first_name . ' ' . $teacher->last_name,
                         ],
                         // 'pivot' => $class->pivot,
                         'materials' => [],
@@ -86,6 +87,7 @@ class ParentController extends Controller {
                         $assignmentData = [
                             'id' => $assignment->id,
                             'title' => $assignment->title,
+                            'description' => $assignment->description,
                             'submissions' => $submissionData,
                         ];
 
@@ -106,7 +108,7 @@ class ParentController extends Controller {
         return response()->json(['data' => ['children' => $childrenData]]);
 
     }
-    
+
 }
 
 
