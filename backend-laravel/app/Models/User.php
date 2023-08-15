@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,10 +16,12 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
+
+    protected $appends = ['FullName'];
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
-        'password',
     ];
 
     /**
@@ -60,5 +63,57 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
+    public function parentRelationships()
+     //Edited By Sally (, 'id')
+    {
+        return $this->hasMany(UserRelationship::class, 'parent_id', 'id');
+    }
+
+    public function childRelationships()
+    {
+        return $this->hasMany(UserRelationship::class, 'child_id');
+    }
+
+
+    public function courses(){
+        return $this->belongsToMany(Course::class, 'student_enrollments', 'student_id', 'course_id')
+                    ->withPivot('enrollment_date', 'attendance');
+    }
+
+    //Added By Sally
+
+    public function getFullNameAttribute() {
+        return implode(" ", [$this->first_name, $this->last_name]);
+
+        //$assg = Assignment::all()->pluck("grade")
+    }
+
+    public function children()
+    {
+        return $this->hasManyThrough(User::class, UserRelationship::class, 'parent_id', 'id', 'id', 'child_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(StudentEnrollment::class, 'student_id', 'id');
+    }
+    public function teacherCourses(){
+        return $this->hasMany(Course::class,'teacher_id');
+    }
+    public function teacherCourseAssignments(){
+        return $this->hasMany(Assignments::class,'course_id');
+    }
+
+
+
+    //Added By Sally
 }
-?>
+
+
+
