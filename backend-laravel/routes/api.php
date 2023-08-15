@@ -18,6 +18,7 @@ Route::group(["prefix" => "Admin"], function(){
   Route::post("/update_course", [AdminController::class, "updateCourse"]);
   Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
 
+  Route::get("/get_students", [AdminController::class, "getAllStudents"]);
   Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
   Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
   Route::post("/student_analytics", [AdminController::class, "getStudentCoursesAnalytics"]);

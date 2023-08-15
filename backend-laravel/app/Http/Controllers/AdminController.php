@@ -244,5 +244,11 @@ class AdminController extends Controller{
             'course_analytics' => $analytics,
         ]);
     }
+    function getAllStudents (){
+        $students = User::where('user_type',4)->get();
+        return response()->json([
+            'students' => $students,
+        ]);
+    }
 
 }
