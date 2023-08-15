@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class StudentEnrollment extends Model
 {
     use HasFactory;
-    //Edited by sally (user_id,course_id )
+
     public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 
     public function course(){
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id','id');
     }
 
     public function submissions(){
