@@ -31,7 +31,9 @@ class StudentController extends Controller {
             "data" => $courses
         ]);
         } catch (\Exception $e) {
-        return response()->json(['error' => 'An error occurred while fetching courses.'], 500);
+            return response()->json([
+                'error' => 'An error occurred while fetching enrolled courses.',
+                'exception'=> $e->getMessage()], 500);
         }
     }
 
@@ -58,7 +60,6 @@ class StudentController extends Controller {
         $user->courses()->attach($courseId, [
             'enrollment_date'=> now(),
             'attendance' => 0,
-            'progress' => 0,
             ]);
 
             $classes_enrolled = $user->courses()->where('course_id', $courseId)->with('teacher')->first();;
@@ -84,7 +85,9 @@ class StudentController extends Controller {
                 "data" => $classes_enrolled
             ]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred while fetching enrolled courses.'], 500);
+            return response()->json([
+                'error' => 'An error occurred while fetching enrolled courses.',
+                'exception'=> $e->getMessage()], 500);
         }
     }
 
@@ -118,7 +121,7 @@ class StudentController extends Controller {
     public function submitAssignment(Request $request) {
         $request->validate([
             'assignment_id' => 'required|exists:assignments,id',
-            'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            // 'Filepath' => 'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         $userId = Auth::id();
@@ -139,34 +142,4 @@ class StudentController extends Controller {
         ], 200);
     }
 
-    function fetchCourseMaterials(Request $request) {
-
-        $course_id = $request->course_id;
-        $course = Course::find($course_id);
-
-        if (!$course) {
-            return response()->json(['error' => 'Course not found.'], 404);
-        }
-
-        $courseMaterials = CourseMaterial::where('course_id', $course_id)->get();
-
-        return response()->json(['courseMaterials' => $courseMaterials]);
-
-    }
-
-
-    function getUserProgress($userId) {
-
-        $user = User::where('id', $userId)
-                    ->where('user_type', 2)
-                    ->first();
-
-        if (!$user) {
-            return response()->json(['data' => ['error' => 'Student not found.']], 404);
-        }
-
-        $enrollments = StudentEnrollment::where('student_id', $userId)->get();
-
-        return response()->json(['data' => ['progress' => $enrollments]]);
-    }
 }
