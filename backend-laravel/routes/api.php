@@ -48,9 +48,8 @@ Route::group(["middleware" => "auth:api"], function (){
 
  });
 
-
+ 
 });
-
 Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logout"]);
