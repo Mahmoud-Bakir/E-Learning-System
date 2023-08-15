@@ -58,7 +58,7 @@ class StudentController extends Controller {
         $user->courses()->attach($courseId, [
             'enrollment_date'=> now(),
             'attendance' => 0,
-            'progress' => 0.
+            'progress' => 0,
             ]);
 
             $classes_enrolled = $user->courses()->where('course_id', $courseId)->with('teacher')->first();;
