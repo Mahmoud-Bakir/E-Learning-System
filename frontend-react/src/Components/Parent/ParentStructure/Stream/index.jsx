@@ -8,9 +8,6 @@ import ClassImageCard from '../../ParentComponents/ClassImageCard';
 const Stream = () => {
     return (
         <div>
-            <div>
-                <ClassImageCard/>
-            </div>
             <div className='flex stream-body-container'>
                 <JoinMeet/>
                 <AssignmentCard/>

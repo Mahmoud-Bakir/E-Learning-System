@@ -11,10 +11,8 @@ import { sendRequest } from "../../../core/config/request";
 import { requestMethods } from "../../../core/enums/requestMethods";
 import { useNavigate } from "react-router-dom";
 
-import CourseInfo from '../../../pages/Parent/CourseInfo'
 
-
-function Parent() {
+function Landing() {
 
   const navigation = useNavigate();
 
@@ -74,8 +72,13 @@ function Parent() {
     setselectedCourse(selectedChildClasses[index])
     console.log('ChildClass 1 ',selectedCourse)
 
-    if(selectedCourseId && selectedCourseIndex){
-      navigation("")
+    if (selectedCourseId !== null && selectedCourseIndex !== null) {
+      console.log('entered');
+      navigation("/course", {
+        state: {
+          selectedCourse: selectedChildClasses[selectedCourseIndex]
+        }
+      });
     }
   }
 
@@ -100,4 +103,4 @@ function Parent() {
   )
 }
 
-export default Parent
+export default Landing

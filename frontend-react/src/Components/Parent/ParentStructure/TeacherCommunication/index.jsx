@@ -7,9 +7,6 @@ import Chat from '../../ParentComponents/Chat';
 const TeacherCommunication = () => {
     return (
         <div>
-            <div>
-                <ClassImageCard/>
-            </div>
             <div className='flex stream-body-container'>
                 <JoinCalendly/>
                 <Chat/>
