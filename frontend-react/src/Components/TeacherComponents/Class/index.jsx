@@ -7,7 +7,9 @@ import Meeting from '../MeetingTab4';
 function Class({ course_id }) {
   const [assignments, setAssignments] = useState([]);
   const [materials, setMaterials] = useState([]);
-  const [statistics, setStatistics] = useState([]);
+  const [statistics, setStatistics] = useState({});
+  const [meetingLink, setMeetingLink] = useState('');
+  const [calendlyLink, setCalendlyLink] = useState('');
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -26,6 +28,8 @@ function Class({ course_id }) {
         setAssignments(data.assignments);
         setMaterials(data.materials);
         setStatistics(data.statistics);
+        setMeetingLink(data.meeting_link);
+        setCalendlyLink(data.calendly_link);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -38,13 +42,13 @@ function Class({ course_id }) {
     {
       id: 'Attendence',
       label: 'Attendence',
-      value: statistics.attendence ? statistics.attendence.value : 0,
+      value: statistics.attendence ? parseFloat(statistics.attendence.value) : 0,
       color: 'hsl(107, 70%, 50%)',
     },
     {
       id: 'Grade',
       label: 'Grade',
-      value: statistics.grade ? statistics.grade.value : 0,
+      value: statistics.grade ? parseFloat(statistics.grade.value) : 0,
       color: 'hsl(168, 70%, 50%)',
     },
   ];
@@ -55,8 +59,8 @@ function Class({ course_id }) {
         <div className='MyResponsivePie'>
           <MyResponsivePie data={data} />
         </div>
-        <Meeting url={'akskaks'} title={'Class Link'} />
-        <Meeting url={'akskaks'} title={'Calendly Link'} />
+        <Meeting url={meetingLink} title={'Class Link'} />
+        <Meeting url={calendlyLink} title={'Calendly Link'} courseId={course_id}/>
       </div>
 
       <div className='right-content'>
