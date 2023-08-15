@@ -14,7 +14,7 @@ function CourseInfo() {
   const { state } = location;
 
   const { selectedCourse } = state;
-  console.log (selectedCourse)
+  const courseAssignments = selectedCourse.assignments
 
   const [filter, setFilter] = useState("Course Analysis");
   
@@ -23,9 +23,8 @@ function CourseInfo() {
     <NavBar/>
     <Tabs onTabChanged={(value) => setFilter(value)}/>
     <ClassImageCard/>
-    {/* {filter === 'Course Analysis' ? <CourseAnalysis data = {data}/> : null} */}
     {filter === 'Course Analysis' ? <CourseAnalysis selectedCourse = {selectedCourse}/> : null}
-    {filter === 'Stream' ? <Stream /> : null}
+    {filter === 'Stream' ? <Stream selectedCourse = {courseAssignments} courseData = {selectedCourse} /> : null}
     {filter === 'Teacher Communication' ? <TeacherCommunication /> : null}
     
  
