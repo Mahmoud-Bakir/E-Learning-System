@@ -24,7 +24,7 @@ class StudentController extends Controller {
 
             $enrolledCoursesIds = $auth_user->courses()->pluck('courses.id')->toArray();
 
-            $courses = Course::whereNotIn('id', $enrolledCoursesIds)->with('teacher')->get();
+            $courses = Course::whereNotIn('id', $enrolledCoursesIds)->get();
 
         return response()->json([
             "status" => "success",
@@ -62,7 +62,7 @@ class StudentController extends Controller {
             'attendance' => 0,
             ]);
 
-            $classes_enrolled = $user->courses()->where('course_id', $courseId)->with('teacher')->first();;
+            $classes_enrolled = $user->courses()->where('course_id', $courseId)->with('teacher')->first();
 
         return response()->json([
             "message" => "Enrollment successful.",

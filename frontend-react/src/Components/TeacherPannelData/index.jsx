@@ -1,11 +1,11 @@
-import "../PannelData/style.css"
-import  StudentRecord  from "../StudentRecord"
 
-export const PannelData = ({records}) => {
+import TeacherRecord from "../AdminComponents/TeacherRecord"
+
+export const TeacherPannelData = ({records}) => {
   return (
     <>{
       records.map((record) => (
-      <StudentRecord
+      <TeacherRecord
         id={record.id}
         first={record.first_name}
         last={record.last_name}
@@ -17,4 +17,4 @@ export const PannelData = ({records}) => {
     </> 
   )
 } 
-export default PannelData
+export default TeacherPannelData

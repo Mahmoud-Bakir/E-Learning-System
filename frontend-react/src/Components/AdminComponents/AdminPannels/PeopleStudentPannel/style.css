@@ -1,0 +1,36 @@
+.pannel{
+    height: 600px;
+    align-items: center;
+}
+.border-pannel{
+    border: 4px solid #2b60ec;
+  }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    width: 150px; /* Set a constant width for cells */
+    height: 50px; /* Set a constant height for cells */
+    padding: 2px; 
+}
+th{
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-size: large;
+    position: sticky;
+    top: 0;
+    background-color: #faf9f9;
+}
+td{
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-size:medium;
+}
+  .pannel-data{
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+}
