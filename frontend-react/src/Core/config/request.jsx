@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { localStorageAction } from "./localstorage";
+import localStorageAction from './localstorage'
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/api";
 // axios.defaults.baseURL = process.env.BASE_URL;
@@ -13,7 +13,7 @@ const sendRequest = async ({
   if (!route) throw Error("URL required");
 
   axios.defaults.headers.authorization = includeHeaders
-    ? `Bearer ${localStorage.getItem("access_token")}`
+    ? `Bearer ${localStorageAction("access_token")}`
     : "";
 
   try {
@@ -22,7 +22,7 @@ const sendRequest = async ({
       url: route,
       data: body,
     });
-
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
