@@ -252,6 +252,17 @@ class AdminController extends Controller{
             'students' => $students,
         ]);
     }
+    function getAllTeachers (){
+        $teachers = User::where('user_type',2)->get();
+        return response()->json([
+            'teachers' => $teachers,
+        ]);
+    function getAllParents (){
+        $parents = User::where('user_type',3)->get();
+        return response()->json([
+            'parents' => $parents,
+         ]);
+    }
 
 
 }
