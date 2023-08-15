@@ -1,7 +1,7 @@
-import "../PannelData/style.css"
+import "./style.css"
 import  StudentRecord  from "../StudentRecord"
 
-export const PannelData = ({records}) => {
+export const StudentPannelData = ({records}) => {
   return (
     <>{
       records.map((record) => (
@@ -17,4 +17,4 @@ export const PannelData = ({records}) => {
     </> 
   )
 } 
-export default PannelData
+export default StudentPannelData
