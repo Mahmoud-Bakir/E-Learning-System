@@ -33,10 +33,8 @@ class TeacherController extends Controller
   }
 
   function createMaterial(Request $request) {
-    $course_name= $request->course_name;
-    $course_id = Course::where("course_name",$course_name)->first();
     $material = new CourseMaterial();
-    $material->course_id = $course_id->id;
+    $material->course_id = $request->id;
     $material->title = $request->title;
     $material->description = $request->description;
     $material->file_URL = $request->file_URL;
