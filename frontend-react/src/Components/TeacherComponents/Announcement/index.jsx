@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-
+import CreateAssignments from '../CreateAssignments';
 function Announcement() {
   return (
-    <div>Announcement</div>
+    <CreateAssignments />
   )
 }
 
