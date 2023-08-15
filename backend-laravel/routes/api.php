@@ -12,6 +12,8 @@ Route::group(["middleware" => "auth:api"], function (){
 
   Route::group(["middleware" => "auth.admin","prefix"=>"Admin"], function (){
 
+  Route::post("/create_user", [AuthController::class, "signUp"]);
+
   Route::post("/create_course", [AdminController::class, "createClass"]);
   Route::post("/update_course", [AdminController::class, "updateCourse"]);
   Route::post("/delete_course", [AdminController::class, "deleteCourse"]);

@@ -49,7 +49,7 @@ const SignIn = () => {
 
   const handleRole = (role) => {
     if (role === 1) {
-      navigate('/Student_Dashboard');
+      navigate('/Dashboard');
     } else if (role === 2) {
       navigate('/Teacher');
     } else if (role === 3) {
