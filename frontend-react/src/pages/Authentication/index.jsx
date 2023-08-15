@@ -55,7 +55,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className='center-form'>
+
+    <div className='center-auth'>
+
       <div className='signin-form'>
         <h1>E-Learning</h1>
 
