@@ -1,3 +1,4 @@
+
 import React from 'react'
 import AdminNav from '../../../Components/AdminComponents/AdminNav'
 import SideMenu from '../../../Components/AdminComponents/SideMenu'
@@ -7,6 +8,7 @@ import SideMenu from '../../../Components/AdminComponents/SideMenu'
     <AdminNav/>
     <div className='flex fullwidth fullheight '>
       <SideMenu/>
+
      
 
     </div>

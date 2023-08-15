@@ -19,6 +19,7 @@
     padding: 10px 10px;
     border-radius: 10px;
   }
-  .nav-tab:hover{
+
+.nav-tab:hover{
     background-color: #011348;
   }

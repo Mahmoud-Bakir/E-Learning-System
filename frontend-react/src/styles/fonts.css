@@ -4,6 +4,13 @@
     font-family: 'Poppins', sans-serif;
     color: white;
  }
+
+ .header-text{
+   font-family: 'Poppins', sans-serif;
+   color: black;
+   font-size: large;
+}
+
  .button-text{
    font-family: 'Poppins', sans-serif;
    color: #2b60ec;
