@@ -25,7 +25,7 @@ function CourseInfo() {
     <ClassImageCard/>
     {filter === 'Course Analysis' ? <CourseAnalysis selectedCourse = {selectedCourse}/> : null}
     {filter === 'Stream' ? <Stream selectedCourse = {courseAssignments} courseData = {selectedCourse} /> : null}
-    {filter === 'Teacher Communication' ? <TeacherCommunication courseData = {selectedCourse} /> : null}
+    {filter === 'Teacher Communication' ? <TeacherCommunication /> : null}
     
  
 

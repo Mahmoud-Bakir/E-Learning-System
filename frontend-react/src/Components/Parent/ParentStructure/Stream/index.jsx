@@ -3,6 +3,7 @@ import './styles.css'
 
 import AssignmentCard from '../../ParentComponents/AssignmentCard';
 import JoinMeet from '../../ParentComponents/JoinMeet';
+import ClassImageCard from '../../ParentComponents/ClassImageCard';
 
 const Stream = ({selectedCourse, courseData}) => {
     return (
