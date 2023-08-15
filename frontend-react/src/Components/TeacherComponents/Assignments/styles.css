@@ -1,0 +1,7 @@
+.assignments-cont{
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 20px;
+    padding: 20px 10px;
+    margin: 20px 200px;
+}
