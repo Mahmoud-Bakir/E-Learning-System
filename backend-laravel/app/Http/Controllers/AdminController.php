@@ -245,13 +245,13 @@ class AdminController extends Controller{
         ]);
     }
     function getAllStudents (){
-        $students = User::where('user_type',4)->get();
+        $students = User::where('user_type',4)->with('courses')->get();
         return response()->json([
             'students' => $students,
         ]);
     }
     function getAllTeachers (){
-        $teachers = User::where('user_type',2)->get();
+        $teachers = User::where('user_type',2)->with('teacherCourses')->get();
         return response()->json([
             'teachers' => $teachers,
         ]);
