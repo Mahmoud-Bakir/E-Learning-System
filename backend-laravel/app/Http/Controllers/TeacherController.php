@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Assignment;
 use App\Models\CourseMaterial;
+use App\Models\StudentEnrollment;
+use App\Models\Submission;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -69,21 +71,34 @@ class TeacherController extends Controller
     ], 200);
 }
 
-
-
-
   function getCourseElements(Request $request){
     $auth_user = Auth::user();
-    $course = Course::find($request->id);
+    $course_id = $request->id;
+    $course = Course::find($course_id);
     $assignments = $course->assignments()->get();
-    $materials= $course->materials()->get();
+    $materials = $course->materials()->get();
+
+    $averageAttendance = StudentEnrollment::where('course_id', $course_id)->avg('attendance');
+    $averageGrade = Submission::join('assignments', 'submissions.assignment_id', '=', 'assignments.id')->where('assignments.course_id', $course_id)->avg('submissions.grade');
+
+    $statistics = [
+        "grade" => [
+            'value' => $averageGrade
+        ],
+        "attendence" => [
+            'value' => $averageAttendance,
+        ]
+    ];
+
     return response()->json([
-      "message" => "success",
-      "assignments" => $assignments,
-      "materials" => $materials,
-      ], 200);
+        "message" => "success",
+        "assignments" => $assignments,
+        "materials" => $materials,
+        "statistics" => $statistics,
+    ], 200);
   }
-  
+
+
   function getAssignmentSubmissions(Request $request){
     $auth_user = Auth::user();
     $assignment = Assignment::find($request->assignment_id);
