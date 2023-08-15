@@ -73,16 +73,16 @@ const SignIn = () => {
           </div>
         )}
         <div className='input-container '>
-          <label>Email:</label>
-          <input
+          <label className='button-text'>Email:</label>
+          <input className='header-text'
             type='text'
             value={credentials.email}
             onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
           />
         </div>
         <div className='input-container '>
-          <label>Password:</label>
-          <input
+          <label className='button-text'>Password:</label>
+          <input className='header-text'
             type='password'
             value={credentials.password}
             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
