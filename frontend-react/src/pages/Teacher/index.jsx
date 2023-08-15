@@ -13,14 +13,14 @@ function Teacher() {
   
   const getTeacherCourses = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/Student/get_all_enrolled_courses', {
+      const response = await fetch('http://127.0.0.1:8000/api/Teacher/courses', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
-      setCourses(data.data);
+      setCourses(data.courses);
     } catch (error) {
       console.log(error);
       navigate('/');
