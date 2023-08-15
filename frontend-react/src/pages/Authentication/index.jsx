@@ -44,7 +44,7 @@ const SignIn = () => {
 
   const handleRole = (role) => {
     if (role === 1) {
-      navigate('/Admin');
+      navigate('/Student_Dashboard');
     } else if (role === 2) {
       navigate('/Teacher');
     } else if (role === 3) {
@@ -55,7 +55,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className='center1'>
+    <div className='center-auth'>
       <div className='signin-form'>
         <h1>E-Learning</h1>
 

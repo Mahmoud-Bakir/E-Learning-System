@@ -1,14 +1,14 @@
 .datacard-container {
-  width: 1000px;
+  width: 100%;
   height: 200px;
-  border: 2px solid black;
+  border: 2px solid rgb(39, 93, 255);
   border-radius: 20px;
   transition: box-shadow 0.3s ease;
   gap: 10%;
 }
 
 .datacard-container:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(39, 93, 255, 0.5);
 }
 
 .chart-container {

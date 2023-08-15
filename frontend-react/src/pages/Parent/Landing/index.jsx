@@ -3,6 +3,8 @@ import './styles.css'
 import DisplayList from '../../../Components/Parent/ParentComponents/DisplayList'
 import DataCard from '../../../Components/Parent/ParentComponents/DataCard'
 import TitleHeader from '../../../Components/Parent/ParentComponents/TitleHeader'
+import NavBar from '../../../Components/Parent/ParentComponents/NavBar'
+import ClassImageCard from '../../../Components/Parent/ParentComponents/ClassImageCard'
 
 import axios from "axios";
 import { sendRequest } from "../../../core/config/request";
@@ -51,15 +53,23 @@ function Parent() {
   };
 
   return (
+  <div className="parent-navbar">
+    <NavBar/>
+    <div className='flex center'>
+    <ClassImageCard/>
+    </div>
+    
     <div className='flex column center parent-container'>  
-      <div className='flex'>
+      <div className='flex fullwidth'>
         <DisplayList children = {childrenData} onSelectChild={handleSelectChild}/>
-        <div>
+        <div className='fullwidth'>
           <TitleHeader/>
           <DataCard childClasses={selectedChildClasses}/>
         </div>  
       </div>
     </div>
+  </div>
+    
   )
 }
 

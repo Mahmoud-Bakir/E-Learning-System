@@ -47,7 +47,7 @@ class ParentController extends Controller {
                         'sessions_number'=>$class->sessions_number,
                         'teacher' => [
                             'id' => $teacher->id,
-                            'full_name' => $child->first_name . ' ' . $child->last_name,
+                            'full_name' => $teacher->first_name . ' ' . $teacher->last_name,
                         ],
                         // 'pivot' => $class->pivot,
                         'materials' => [],
