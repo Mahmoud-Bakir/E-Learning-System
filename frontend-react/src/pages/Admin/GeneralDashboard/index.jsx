@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useEffect } from "react"
 import AdminNav from '../../../Components/AdminComponents/AdminNav'
 import SideMenu from '../../../Components/AdminComponents/SideMenu'
 import AdminPannel from '../../../Components/AdminComponents/AdminPannels/PeopleStudentPannel'
 import GeneralPannel from '../../../Components/AdminComponents/AdminPannels/GeneralPannel'
 import PeopleStudentPannel from '../../../Components/AdminComponents/AdminPannels/PeopleStudentPannel'
+import PeopleTeacherPannel from '../../../Components/AdminComponents/AdminPannels/PeopleTeacherPannel'
  const GeneralDashboard = () => {
   const [people,setPeople] = useState(false)
   const [courses,setCourses] = useState(false)
@@ -41,40 +43,43 @@ const handleParents = () => {
  console.log(courses)
  console.log(people)
 
- if(people&&students){
-  return (
+
+  if(people&&students){
+    return (
+      <>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
+      <div className='flex fullwidth gap-100  '>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
+        <PeopleStudentPannel/>
+        <GeneralPannel visibility={"none"}/>
+      </div>
+      </>
+    ) 
+   }
+   if(people&&teachers){
+    return (
+      <>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
+      <div className='flex fullwidth gap-100  '>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
+        <PeopleTeacherPannel/>
+        <GeneralPannel visibility={"none"}/>
+      </div>
+      </>
+    ) 
+   }
+    return(
     <>
-    <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
-    <div className='flex fullwidth gap-100  '>
-      <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
-      <PeopleStudentPannel/>
-      <GeneralPannel visibility={"none"}/>
-    </div>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
+     <div className='flex fullwidth gap-100  '>
+       <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
+       <GeneralPannel />
+      </div>
+   
     </>
-  ) 
- }
- if(people&&teachers){
-  return (
-    <>
-    <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
-    <div className='flex fullwidth gap-100  '>
-      <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
-      <PeopleStudentPannel/>
-      <GeneralPannel visibility={"none"}/>
-    </div>
-    </>
-  ) 
- }
-  return(
-  <>
-    <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
-   <div className='flex fullwidth gap-100  '>
-     <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
-     <GeneralPannel />
-    </div>
+   )} 
+
  
-  </>
- )} 
  
 
  export default GeneralDashboard

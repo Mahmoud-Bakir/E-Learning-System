@@ -1,6 +1,6 @@
 import "./style.css"
 import Header from "../../Header"
-import PannelData from "../../PannelData"
+import PannelData from "../../StudentPannelData"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"

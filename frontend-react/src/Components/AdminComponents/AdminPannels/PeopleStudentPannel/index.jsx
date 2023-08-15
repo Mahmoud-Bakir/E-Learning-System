@@ -1,6 +1,6 @@
 import "./style.css"
 import Header from "../../Header"
-import PannelData from "../../PannelData"
+import PannelData, { StudentPannelData } from "../../StudentPannelData"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
@@ -9,13 +9,10 @@ import axios from "axios"
   const token = localStorage.getItem('token');
   const [records,setRecords] = useState([])
 
-  useEffect(() => 
-  getStudents() 
-  , []
-  )
-  
 
-  const getStudents = async () =>{
+  
+  useEffect(() => {
+    async function getStudents() {
     const response = await axios.get('http://127.0.0.1:8000/api/Admin/get_students', {
       headers: {
         Authorization: "Bearer " + token,
@@ -29,11 +26,14 @@ import axios from "axios"
       email: student.email,
       first_name: student.first_name,
       last_name: student.last_name,
+      
     }));
-   
-     setRecords(recs)
-     console.log(recs)
-  } 
+    setRecords(recs)
+    console.log(recs)
+  }
+  getStudents()},[])
+ 
+  
 
 
 
@@ -42,7 +42,7 @@ import axios from "axios"
     <div className='flex column  width-65 margin-20 circular-20 padding-10 border-pannel pannel secondary-bg pannel-data'>
       <table>
       <Header t1={"ID"} t2={"First Name"} t3={"Last Name"} t4={"email"} t5={"Analytics"} t6={"Actions"}/>
-      <PannelData records={records} />
+      <StudentPannelData records={records} />
       </table>  
     </div>
   )
