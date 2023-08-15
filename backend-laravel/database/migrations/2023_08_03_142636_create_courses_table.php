@@ -9,26 +9,30 @@ class CreateCoursesTable extends Migration
 {
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('teacher_id'); // The foreign key to users table
-            $table->string('course_name');
-            $table->text('description')->nullable();
-            $table->string('category_id');
-            $table->integer('enrollment_limit')->nullable();
-            $table->integer('sessions_number')->nullable();
-            $table->string('meeting_link');
-            $table->timestamps();
-
-            $table->foreign('teacher_id')->references('id')->on('users');
-
-        });
-
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category')->unique();
             $table->timestamps();
         });
+
+        Schema::create('courses', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('teacher_id'); // The foreign key to users table
+            $table->string('course_name');
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->integer('enrollment_limit')->nullable();
+            $table->integer('sessions_number')->nullable();
+            $table->string('meeting_link');
+            $table->string('calendly_link')->nullable();
+            $table->timestamps();
+
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
+
+        });
+
+     
 
         Schema::create('student_enrollments', function (Blueprint $table) {
             $table->id();
@@ -36,7 +40,6 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_id'); // The foreign key to courses table
             $table->date('enrollment_date');
             $table->integer('attendance')->default(0);;
-            $table->integer('progress')->default(0);
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('users');
@@ -73,8 +76,8 @@ class CreateCoursesTable extends Migration
             $table->string('Filepath')->nullable();
             $table->decimal('grade', 5, 2)->nullable();
             
-            $table->foreign('student_id')->references('ID')->on('student_enrollments');
-            $table->foreign('assignment_id')->references('ID')->on('assignments');
+            $table->foreign('student_id')->references('student_id')->on('student_enrollments');
+            $table->foreign('assignment_id')->references('id')->on('assignments');
         });
     }
 
