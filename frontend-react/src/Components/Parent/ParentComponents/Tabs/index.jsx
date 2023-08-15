@@ -18,9 +18,9 @@ import TabButton from '../TabButton';
                 onSelected={(value) => selectHandler(value)}
             />
             <TabButton
-                name = {"Notifications"}
-                selected = {selectedTab === "Notifications"}
-                value="Notifications"
+                name = {"Stream"}
+                selected = {selectedTab === "Stream"}
+                value="Stream"
                 onSelected={(value) => selectHandler(value)}
             />
             <TabButton

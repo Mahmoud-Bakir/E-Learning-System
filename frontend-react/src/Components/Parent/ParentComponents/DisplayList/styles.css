@@ -1,5 +1,6 @@
 .list-main-container {
   width: 400px;
+  height: auto;
   gap: 10px;
   padding: 20px;
 }
@@ -16,9 +17,9 @@
   width: 300px;
   align-items: flex-start;
   padding: 10px 20px;
-  border: 2px solid black;
+  border: 2px solid rgb(39, 93, 255);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(39, 93, 255, 0.5);
 }
 
 .list-container li {
