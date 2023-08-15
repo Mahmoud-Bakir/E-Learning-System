@@ -19,14 +19,12 @@ class TeacherController extends Controller
 {
 
    function createAssignment(Request $request) {
-    $course_name= $request->course_name;
-    $course_id = Course::where("course_name",$course_name)->first();
     $assignment = new Assignment();
     $assignment->title = $request->title;
     $assignment->description = $request->description;
     $assignment->due_date = $request->date;
     $assignment->total_grade = $request->total_grade;
-    $assignment->course_id = $course_id->id;
+    $assignment->course_id = $request->id;
     $assignment->save();
     return response()->json([
         "message" => "assignment created.",
