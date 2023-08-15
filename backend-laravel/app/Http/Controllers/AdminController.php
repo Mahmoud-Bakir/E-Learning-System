@@ -255,6 +255,7 @@ class AdminController extends Controller{
         return response()->json([
             'teachers' => $teachers,
         ]);
+    }
     function getAllParents (){
         $parents = User::where('user_type',3)->get();
         return response()->json([
