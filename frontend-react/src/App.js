@@ -12,6 +12,9 @@ import Course from './pages/Parent/Course'
 import Student from "./pages/Student";
 import GeneralDashboard from "./pages/Admin/GeneralDashboard";
 import AddUser from "./pages/AddUser";
+import Landing from "./pages/Landing";
+import './styles/utilities.css' 
+import './styles/App.css' 
 
 
 function App() {
@@ -26,6 +29,7 @@ function App() {
           <Route path="/Parent" element={<Parent/>} />
           <Route path="/course" element={<Course/>} />
           <Route path="/Student" element={<Student />} />
+          <Route path="/Landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>
     </div>

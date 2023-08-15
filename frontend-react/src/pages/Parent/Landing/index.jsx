@@ -51,6 +51,7 @@ function Landing() {
     setSelectedChildId(childId);
 
     const selectedChild = childrenData.find(child => child.id === childId);
+
     if (selectedChild) {
       
       setSelectedChildClasses(selectedChild.classes);
@@ -64,16 +65,11 @@ function Landing() {
   const handleSelectedCourse = (courseId, index) => {
     setselectedCourseId(courseId)
     setselectedCourseIndex(index)
-
-    console.log('courseId ', selectedCourseId)
-    console.log('Index ', selectedCourseIndex)
-
-    console.log('ChildClass ', selectedChildClasses[index])
+ 
     setselectedCourse(selectedChildClasses[index])
-    console.log('ChildClass 1 ',selectedCourse)
 
     if (selectedCourseId !== null && selectedCourseIndex !== null) {
-      console.log('entered');
+      // console.log('entered');
       navigation("/course", {
         state: {
           selectedCourse: selectedChildClasses[selectedCourseIndex]
@@ -85,10 +81,7 @@ function Landing() {
   return (
   <div className="parent-navbar">
     <NavBar/>
-    <div className='flex center'>
-    <ClassImageCard/>
-    </div>
-    
+    <ClassImageCard className="class-image"/>
     <div className='flex column center parent-container'>  
       <div className='flex fullwidth'>
         <DisplayList children = {childrenData} onSelectChild={handleSelectChild}/>
