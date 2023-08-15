@@ -11,12 +11,15 @@ Route::group(["middleware" => "auth:api"], function (){
 
 
   Route::group(["middleware" => "auth.admin","prefix"=>"Admin"], function (){
-    
+
   Route::post("/create_course", [AdminController::class, "createClass"]);
   Route::post("/update_course", [AdminController::class, "updateCourse"]);
   Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
 
   Route::get("/get_students", [AdminController::class, "getAllStudents"]);
+  Route::get("/get_teachers", [AdminController::class, "getAllTeachers"]);
+  Route::get("/get_parents", [AdminController::class, "getAllParents"])
+  ;
   Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
   Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
   Route::post("/student_analytics", [AdminController::class, "getStudentCoursesAnalytics"]);
@@ -29,6 +32,7 @@ Route::group(["middleware" => "auth:api"], function (){
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
   Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
+  Route::post("/calendly", [TeacherController::class, "addCalendly"]);
  });
 
  Route::group(["prefix" => "Parent"], function(){
@@ -41,10 +45,11 @@ Route::group(["middleware" => "auth:api"], function (){
     Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
     Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
     Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
-  
+
  });
+
  
+});
 Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logout"]);
-});

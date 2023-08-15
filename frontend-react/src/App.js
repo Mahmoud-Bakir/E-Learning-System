@@ -4,11 +4,13 @@ import "./styles/utilities.css";
 import "./styles/colors.css";
 import "./styles/fonts.css";
 
+
 import Authentication from "./pages/Authentication";
 
 import StudentDashboard from './pages/Admin/StudentDashboard';
 import Teacher from "./pages/Teacher";
-import Parent from "./pages/Parent/Landing";
+import Parent from "./pages/Parent/Home";
+import Course from './pages/Parent/Course'
 import Student from "./pages/Student";
 import Landing from "./pages/Landing";
 import './styles/utilities.css' 
@@ -21,9 +23,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Authentication />} />
-          <Route path="/Student_Dashboard" element={<StudentDashboard />} />
+          <Route path="/Admin" element={<StudentDashboard />} />
           <Route path="/Teacher" element={<Teacher/>} />
           <Route path="/Parent" element={<Parent/>} />
+          <Route path="/course" element={<Course/>} />
           <Route path="/Student" element={<Student />} />
           <Route path="/Landing" element={<Landing />} />
         </Routes>

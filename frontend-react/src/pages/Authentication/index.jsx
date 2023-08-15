@@ -27,7 +27,11 @@ const SignIn = () => {
 
       if (data.message === 'User signin successfully') {
         console.log('Token:', data.token);
+        console.log(data);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('first_name', data.first_name);
+        localStorage.setItem('last_name', data.last_name);
+
         handleRole(data.user_type);
       } else {
         if (data.errors) {
@@ -44,7 +48,7 @@ const SignIn = () => {
 
   const handleRole = (role) => {
     if (role === 1) {
-      navigate('/Admin');
+      navigate('/Student_Dashboard');
     } else if (role === 2) {
       navigate('/Teacher');
     } else if (role === 3) {
@@ -55,7 +59,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className='center-form'>
+
+    <div className='center-auth'>
       <div className='signin-form'>
         <h1>E-Learning</h1>
 

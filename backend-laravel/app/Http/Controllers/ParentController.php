@@ -21,6 +21,7 @@ class ParentController extends Controller {
         $parent = User::find($userId);
         $childrenData = [];
 
+
         if ($parent) {
             $children = $parent->children()->select('users.id', 'users.first_name', 'users.last_name')->get();
 
@@ -85,6 +86,7 @@ class ParentController extends Controller {
                         $assignmentData = [
                             'id' => $assignment->id,
                             'title' => $assignment->title,
+                            'description' => $assignment->description,
                             'submissions' => $submissionData,
                         ];
 
@@ -105,7 +107,7 @@ class ParentController extends Controller {
         return response()->json(['data' => ['children' => $childrenData]]);
 
     }
-    
+
 }
 
 
