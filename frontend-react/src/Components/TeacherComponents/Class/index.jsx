@@ -4,8 +4,7 @@ import MyResponsivePie from '../../Common/PieChart';
 import Notification from '../../Common/Notification';
 import Meeting from '../MeetingTab4';
 
-function Class({ course_id }) {
-  const [assignments, setAssignments] = useState([]);
+function Class({course_id,assignments,setAssignments}) {
   const [materials, setMaterials] = useState([]);
   const [statistics, setStatistics] = useState({});
   const [meetingLink, setMeetingLink] = useState('');
