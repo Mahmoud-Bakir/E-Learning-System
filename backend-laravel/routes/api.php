@@ -6,22 +6,23 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
+Route::group(["middleware" => "auth:api"], function (){
 
-Route::group(["prefix" => "Admin"], function(){
+  Route::group(["middleware" => "auth.admin","prefix"=>"Admin"], function (){
 
-  Route::post("/create_user", [AuthController::class, "signUp"]);
-  Route::post("/update_user", [AdminController::class, "updateUser"]);
-  Route::post("/delete_user", [AdminController::class, "deleteUser"]);
+    Route::post("/create_user", [AuthController::class, "signUp"]);
+    Route::post("/update_user", [AdminController::class, "updateUser"]);
+    Route::post("/delete_user", [AdminController::class, "deleteUser"]);
+   
+    Route::post("/create_course", [AdminController::class, "createClass"]);
+    Route::post("/update_course", [AdminController::class, "updateCourse"]);
+    Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
+   
+    Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
+    Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
+    Route::post("/student_analytics", [AdminController::class, "getStudentCoursesAnalytics"]);
 
-  Route::post("/create_course", [AdminController::class, "createClass"]);
-  Route::post("/update_course", [AdminController::class, "updateCourse"]);
-  Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
-
-  Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
-  Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
-  Route::post("/student_analytics", [AdminController::class, "getStudentCoursesAnalytics"]);
-
- });
+  });
 
 
 
@@ -44,7 +45,7 @@ Route::group(["prefix" => "Admin"], function(){
     Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
  });
 
-
+});
 
 
 Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
