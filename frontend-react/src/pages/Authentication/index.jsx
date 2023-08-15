@@ -61,9 +61,6 @@ const SignIn = () => {
   return (
 
     <div className='center-auth'>
-=========
-
->>>>>>>>> Temporary merge branch 2
       <div className='signin-form'>
         <h1>E-Learning</h1>
 
