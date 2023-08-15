@@ -95,9 +95,31 @@ class TeacherController extends Controller
         "assignments" => $assignments,
         "materials" => $materials,
         "statistics" => $statistics,
+        'meeting_link' => $course->meeting_link,
+        'calendly_link' =>  $course->calendly_link,
     ], 200);
   }
 
+  function addCalendly(Request $request)
+  {
+      $auth_user = Auth::user();
+      $course_id = $request->id;
+      $course = Course::find($course_id);
+  
+      if ($course) {
+          $course->calendly_link = $request->calendly_link;
+          $course->save();
+  
+          return response()->json([
+              "message" => "Calendly link is set",
+              'calendly_link' => $course->calendly_link,
+          ], 200);
+      } else {
+          return response()->json([
+              "message" => "Course not found",
+          ], 404);
+      }
+  }
 
   function getAssignmentSubmissions(Request $request){
     $auth_user = Auth::user();

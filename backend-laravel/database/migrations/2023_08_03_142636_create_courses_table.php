@@ -24,6 +24,7 @@ class CreateCoursesTable extends Migration
             $table->integer('enrollment_limit')->nullable();
             $table->integer('sessions_number')->nullable();
             $table->string('meeting_link');
+            $table->string('calendly_link')->nullable();
             $table->timestamps();
 
             $table->foreign('teacher_id')->references('id')->on('users');
