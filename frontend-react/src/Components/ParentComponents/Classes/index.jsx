@@ -1,19 +1,22 @@
 import React from 'react'
 import './style.css'
-const ClassCard = ({classs})=> {
+import Button from '../../Button/index'
+
+
+const ClassCard = ({nav, btn, p1,p2,p3,p4})=> {
   return (
 
-    <div className="flex column placeCard">
+    <div className="course-card">
     <div className="rounded imagePlace">
       <img className="imagePlace" src="https://picsum.photos/200" alt="Place" />
     </div>
     <div className="placeDetails">
-      <p className="strong">
-        {classs.course_name}, {classs.teacher.FullName}
-      </p>
-      <p className="secondary">{classs.description}</p>
+      <h3 className="strong">
+        {p1}, {p2}
+      </h3>
+      <h4 className="secondary">{p4}</h4>
     </div>
-    <button>View Class</button>
+    <Button text={btn} navig={nav} enabled={true} k={p3}/>
     </div>
 
   )
