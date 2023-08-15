@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
 
- const AdminPannel = () => {
+ const PeopleStudentPannel = () => {
   const token = localStorage.getItem('token');
   const [records,setRecords] = useState([])
 
@@ -47,4 +47,4 @@ import axios from "axios"
     </div>
   )
   }
- export default AdminPannel
+ export default PeopleStudentPannel
