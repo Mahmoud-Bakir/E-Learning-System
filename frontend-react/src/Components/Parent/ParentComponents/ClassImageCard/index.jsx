@@ -5,9 +5,9 @@ const ClassImageCard = () => {
     return (
         <div className='image-card-container'>
             <div className='flex column'>
-                <h2>Course Name</h2>
+                {/* <h2>Course Name</h2>
                 <div className="spacer-15"></div>
-                <h3>Description</h3>
+                <h3>Description</h3> */}
             </div>
         </div>
     );
