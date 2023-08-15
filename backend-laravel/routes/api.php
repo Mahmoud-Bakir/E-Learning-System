@@ -7,13 +7,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-
-Route::group(["prefix" => "Admin"], function(){
-
-  Route::post("/create_user", [AuthController::class, "signUp"]);
-  Route::post("/update_user", [AdminController::class, "updateUser"]);
-  Route::post("/delete_user", [AdminController::class, "deleteUser"]);
-
+Route::group(["middleware" => "auth:api"], function (){
+  Route::group(["middleware" => "auth.admin","prefix"=>"Admin"], function (){
+    
   Route::post("/create_course", [AdminController::class, "createClass"]);
   Route::post("/update_course", [AdminController::class, "updateCourse"]);
   Route::post("/delete_course", [AdminController::class, "deleteCourse"]);
@@ -25,25 +21,17 @@ Route::group(["prefix" => "Admin"], function(){
 
  });
 
-
-
  Route::group(["prefix" => "Teacher"], function(){
   Route::post("/create_assignment", [TeacherController::class, "createAssignment"]);
   Route::get("/courses", [TeacherController::class, "getClasses"]);
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
   Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
-
-  
  });
-
-
 
  Route::group(["prefix" => "Parent"], function(){
    Route::get("/get_all_children_Data", [ParentController::class, "getAllChildrenData"]);
  });
-
-
 
  Route::group(["prefix" => "Student"], function(){
     Route::get("/get_all_courses", [StudentController::class, "getAllCourses"]);
@@ -54,7 +42,7 @@ Route::group(["prefix" => "Admin"], function(){
   
  });
 
-
+});
 
 
 Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
