@@ -16,29 +16,7 @@ function CourseInfo() {
   const { selectedCourse } = state;
   console.log (selectedCourse)
 
-  const [filter, setFilter] = useState("all");
-  // const data = [
-  //   {
-  //     "Section": "Average Grade",
-  //     "Average": 13,
-  //     "AverageColor": "hsl(0, 70%, 50%)",
-  //   },
-  //   {
-  //     "Section": "Submitted Assignments",
-  //     "Submitted Assignments": 148,
-  //     "AverageColor": "hsl(120, 70%, 50%)",
-  //   },
-  //   {
-  //     "Section": "Attendance",
-  //     "Attendance": 152,
-  //     "AverageColor": "hsl(240, 70%, 50%)",
-  //   },
-  //   {
-  //     "Section": "Progress",
-  //     "Progress": 42,
-  //     "AverageColor": "hsl(30, 70%, 50%)",
-  //   }
-  // ]
+  const [filter, setFilter] = useState("Course Analysis");
   
   return (
     <div className='parent-container'>
@@ -46,7 +24,7 @@ function CourseInfo() {
     <Tabs onTabChanged={(value) => setFilter(value)}/>
     <ClassImageCard/>
     {/* {filter === 'Course Analysis' ? <CourseAnalysis data = {data}/> : null} */}
-    {filter === 'Course Analysis' ? <CourseAnalysis/> : null}
+    {filter === 'Course Analysis' ? <CourseAnalysis selectedCourse = {selectedCourse}/> : null}
     {filter === 'Stream' ? <Stream /> : null}
     {filter === 'Teacher Communication' ? <TeacherCommunication /> : null}
     
