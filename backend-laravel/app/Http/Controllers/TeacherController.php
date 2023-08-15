@@ -31,6 +31,7 @@ class TeacherController extends Controller
         "assignment" => $assignment,
         ], 200);
   }
+
   function createMaterial(Request $request) {
     $course_name= $request->course_name;
     $course_id = Course::where("course_name",$course_name)->first();
@@ -46,19 +47,34 @@ class TeacherController extends Controller
         ], 200);
   }
 
-  function getClasses(){
+  function getClasses() {
     $auth_user = Auth::user();
-    $courses = $auth_user->teacherCourses()->get();
+
+    $courses = Course::join('categories', 'courses.category_id', '=', 'categories.id')
+        ->leftJoin('student_enrollments', 'courses.id', '=', 'student_enrollments.course_id')
+        ->select(
+            'courses.id',
+            'courses.course_name',
+            'courses.description',
+            'categories.category'
+        )
+        ->selectRaw('COUNT(student_enrollments.id) as enrollment_count')
+        ->where('courses.teacher_id', $auth_user->id)
+        ->groupBy('courses.id', 'courses.course_name', 'courses.description', 'categories.category')
+        ->get();
+
     return response()->json([
-      "message" => "success",
-      "courses" => $courses,
-      ], 200);
-  }
+        "message" => "success",
+        "courses" => $courses,
+    ], 200);
+}
+
+
+
+
   function getCourseElements(Request $request){
     $auth_user = Auth::user();
-    $course_name= $request->course_name;
-    $course_id = Course::where("course_name",$course_name)->first();
-    $course = Course::find($course_id);
+    $course = Course::find($request->id);
     $assignments = $course->assignments()->get();
     $materials= $course->materials()->get();
     return response()->json([
@@ -67,6 +83,7 @@ class TeacherController extends Controller
       "materials" => $materials,
       ], 200);
   }
+  
   function getAssignmentSubmissions(Request $request){
     $auth_user = Auth::user();
     $assignment = Assignment::find($request->assignment_id);
