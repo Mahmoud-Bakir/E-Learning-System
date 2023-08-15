@@ -8,6 +8,9 @@ import Admin from "./pages/Admin";
 import Teacher from "./pages/Teacher";
 import Parent from "./pages/Parent/Course info";
 import Student from "./pages/Student";
+import Landing from "./pages/Landing";
+import './styles/utilities.css' 
+import './styles/App.css' 
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
           <Route path="/Teacher" element={<Teacher/>} />
           <Route path="/" element={<Parent/>} />
           <Route path="/Student" element={<Student />} />
+          <Route path="/Landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>
     </div>
