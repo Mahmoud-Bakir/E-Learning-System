@@ -6,6 +6,7 @@ import AdminPannel from '../../../Components/AdminComponents/AdminPannels/People
 import GeneralPannel from '../../../Components/AdminComponents/AdminPannels/GeneralPannel'
 import PeopleStudentPannel from '../../../Components/AdminComponents/AdminPannels/PeopleStudentPannel'
 import PeopleTeacherPannel from '../../../Components/AdminComponents/AdminPannels/PeopleTeacherPannel'
+import PeopleparentPannel from '../../../Components/AdminComponents/AdminPannels/PeopleParentPannel copy'
  const GeneralDashboard = () => {
   const [people,setPeople] = useState(false)
   const [courses,setCourses] = useState(false)
@@ -56,6 +57,30 @@ const handleParents = () => {
       </>
     ) 
    }
+   if(people&&parents){
+    return (
+      <>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
+      <div className='flex fullwidth gap-100  '>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
+        <PeopleparentPannel/>
+        <GeneralPannel visibility={"none"}/>
+      </div>
+      </>
+    ) 
+   }
+      if(people&&parents){
+    return (
+      <>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses}/>
+      <div className='flex fullwidth gap-100  '>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility}/>
+        <PeopleparentPannel/>
+        <GeneralPannel visibility={"none"}/>
+      </div>
+      </>
+    ) 
+   }
    if(people&&teachers){
     return (
       <>
@@ -78,8 +103,5 @@ const handleParents = () => {
    
     </>
    )} 
-
- 
- 
-
+   
  export default GeneralDashboard

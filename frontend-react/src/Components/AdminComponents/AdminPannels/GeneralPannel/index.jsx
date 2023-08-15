@@ -1,4 +1,3 @@
-import "./style.css"
 import Header from "../../Header"
 import PannelData from "../../StudentPannelData"
 import { useState } from "react"

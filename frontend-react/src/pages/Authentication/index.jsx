@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import logo from '../../assets/logo.png'
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
@@ -57,7 +58,7 @@ const SignIn = () => {
   return (
     <div className='center-form'>
       <div className='signin-form'>
-        <h1>E-Learning</h1>
+        <img src={logo} alt="" />
 
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
         {errorMessages && (
