@@ -3,12 +3,14 @@ import './styles.css';
 import Notification from '../../Common/Notification';
 
 function Assignments({assignments}) {
+  const [submissionId , setSubmissionId] = useState (null);
   return (<>
-    <div className='assignments-cont'>
+    { !submissionId && <div className='assignments-cont'>
       {assignments.map((assignment) => (
-        <Notification key={assignment.id} title={assignment.title} due={assignment.due_date} type='assignment' />
+        <Notification key={assignment.id} active={true} id={assignment.id} title={assignment.title} due={assignment.due_date} type='assignment' setSubmissionId={setSubmissionId}/>
       ))}
-    </div>
+    </div>}
+    {submissionId && <h1>submissions</h1>}
   </>)
 }
 
