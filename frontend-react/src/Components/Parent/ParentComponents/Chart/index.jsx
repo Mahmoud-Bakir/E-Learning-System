@@ -2,8 +2,9 @@
 import { ResponsiveBar } from '@nivo/bar'
 
     const colorMapping = d => d.data.AverageColor;
+    
     const MyResponsiveBar = ({ data }) => (
- 
+        
     <ResponsiveBar
         data={data}
         keys={[

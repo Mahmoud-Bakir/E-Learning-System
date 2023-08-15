@@ -1,0 +1,15 @@
+.chat-container {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.chat-header {
+  align-items: center;
+  gap: 5%;
+  padding: 10px;
+}
+
+.header-profile-img {
+  width: 70px;
+  height: auto;
+}
