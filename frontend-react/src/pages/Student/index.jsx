@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import ClassCard from '../../Components/ParentComponents/Classes'
 import sendRequest from '../../Core/config/request'
 import requestMethods from '../../Core/enums/requestMethods'
+import AdminNav from '../../Components/AdminComponents/AdminNav/index'
 const Student = ()=> {
   const navigation = useNavigate();
-  const [classes, setClasses ] = useState([{
-
-  }])
+  const [classes, setClasses ] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,9 +14,10 @@ const Student = ()=> {
           route: "/Student/get_all_enrolled_courses",
           method: requestMethods.GET,
         });
+        console.log(response.data);
         setClasses(response.data);
       } catch (error) {
-        console.log(error.response.status);
+        // console.log(error.response.status);
         if (error.response.status === 401) {
           // navigation("/Landing");
         }
@@ -28,8 +28,9 @@ const Student = ()=> {
   return (
     <div className='flex column page'>
       <div className="flex wrap">
+        <AdminNav/>
         {classes.map((classs) => {
-            return <ClassCard key={1} classs={classs} />;
+            return <ClassCard key={classs.id} classs={classs} />;
         })}
       </div>
     </div>
