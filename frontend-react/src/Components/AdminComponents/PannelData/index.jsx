@@ -1,125 +1,20 @@
 import "../PannelData/style.css"
+import  StudentRecord  from "../StudentRecord"
 
-export const PannelData = () => {
+export const PannelData = ({records}) => {
   return (
-    <>
-      <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>  <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>johndoe@example.com</td>
-          <td>Analytics Data</td>
-          <td>View/Edit</td>
-        </tr>
-        </>
-      
+    <>{
+      records.map((record) => (
+      <StudentRecord
+        id={record.id}
+        first={record.first_name}
+        last={record.last_name}
+        email={record.email}
+        key={record.id}
+        />
      
+    ))} 
+    </> 
   )
 } 
 export default PannelData
