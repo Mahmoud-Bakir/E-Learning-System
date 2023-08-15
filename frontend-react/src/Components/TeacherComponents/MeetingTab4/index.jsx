@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
 
-function Meeting({ url, title }) {
+function Meeting({ url, title, courseId }) {
   const [meetingLink, setMeetingLink] = useState(url);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleToggleEdit = () => {
-    setIsEditing(!isEditing);
+    // Allow editing only for the Calendly title
+    if (title === 'Calendly Link') {
+      setIsEditing(!isEditing);
+    }
   };
 
-  const handleSaveMeetingLink = () => {
-    setIsEditing(false);
+  const handleSaveMeetingLink = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/Teacher/calendly', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          id: courseId,
+          calendly_link: meetingLink,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMeetingLink(data.calendly_link);
+        setIsEditing(false);
+      } else {
+        console.error('Error saving calendly link');
+      }
+    } catch (error) {
+      console.error('Error saving calendly link:', error);
+    }
   };
 
   const handleJoinMeeting = () => {
@@ -31,7 +56,9 @@ function Meeting({ url, title }) {
       ) : (
         <div>
           <button className="join-button" onClick={handleJoinMeeting}>Join</button>
-          <button className="edit-button" onClick={handleToggleEdit}>Edit</button>
+          {title === 'Calendly Link' && (
+            <button className="edit-button" onClick={handleToggleEdit}>Edit</button>
+          )}
         </div>
       )}
     </div>

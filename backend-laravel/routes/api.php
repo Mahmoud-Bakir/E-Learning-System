@@ -32,6 +32,7 @@ Route::group(["prefix" => "Admin"], function(){
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
   Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
+  Route::post("/calendly", [TeacherController::class, "addCalendly"]);
 
   
  });
