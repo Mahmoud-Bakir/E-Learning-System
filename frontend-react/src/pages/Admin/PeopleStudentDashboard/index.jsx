@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import AdminNav from '../../../Components/AdminComponents/AdminNav'
 import SideMenu from '../../../Components/AdminComponents/SideMenu'
-import AdminPannel from '../../../Components/AdminComponents/AdminPannel'
+import AdminPannel from '../../../Components/AdminComponents/AdminPannels/PeopleStudentPannel'
  const StudentDashboard = () => {
+ 
   return (
    
     <>
-    <AdminNav/>
+    <AdminNav />
     <div className='flex fullwidth gap-100  '>
       <SideMenu/>
       <AdminPannel/>
