@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CourseCard from '../../Components/Common/CourseCard';
 import Course from '../../Components/TeacherComponents/Course';
+import NavBar from '../../Components/TeacherComponents/NavBar'
 import './styles.css';
 
 function Teacher() {
@@ -33,6 +34,7 @@ function Teacher() {
 
   return (
     <>
+      <NavBar/>
       {!course_id && (
         <div className='courses-container'>
           {courses.map(course => (
