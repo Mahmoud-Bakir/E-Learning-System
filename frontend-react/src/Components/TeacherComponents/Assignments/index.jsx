@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import Notification from '../../Common/Notification';
+import Submissions from '../Submissions';
 
-function Assignments({assignments}) {
-  const [submissionId , setSubmissionId] = useState (null);
+function Assignments({assignments, assignmentId,setAssignmentId}) {
+
   return (<>
-    { !submissionId && <div className='assignments-cont'>
+    { !assignmentId && <div className='assignments-cont'>
       {assignments.map((assignment) => (
-        <Notification key={assignment.id} active={true} id={assignment.id} title={assignment.title} due={assignment.due_date} type='assignment' setSubmissionId={setSubmissionId}/>
+        <Notification key={assignment.id} active={true} id={assignment.id} title={assignment.title} due={assignment.due_date} type='assignment' setAssignmentId={setAssignmentId}/>
       ))}
     </div>}
-    {submissionId && <h1>submissions</h1>}
+    {assignmentId && <Submissions assignmentId={assignmentId} setAssignmentId={setAssignmentId} />}
+    
   </>)
 }
 

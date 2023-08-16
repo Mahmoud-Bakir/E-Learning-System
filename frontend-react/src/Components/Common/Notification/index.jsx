@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 
-function Notification({ title, due = '', type, setSubmissionId, id, active =false }) {
+function Notification({ title, due = '', type, setAssignmentId, id, active =false }) {
   let img_src;
   
   if (type === 'assignment') {
@@ -12,7 +12,7 @@ function Notification({ title, due = '', type, setSubmissionId, id, active =fals
 
   const handelAssignment = () => {
     if(type === 'assignment' && active){
-    setSubmissionId(id);
+    setAssignmentId(id);
   }}
 
   return (
