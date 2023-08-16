@@ -12,27 +12,34 @@ function Class({course_id,assignments,setAssignments}) {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/Teacher/course_elements', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id: course_id }),
+    
+    function fetchData() {
+      fetch('http://127.0.0.1:8000/api/Teacher/course_elements', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: course_id }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setAssignments(data.assignments);
+          setMaterials(data.materials);
+          setStatistics(data.statistics);
+          setMeetingLink(data.meeting_link);
+          setCalendlyLink(data.calendly_link);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
         });
-
-        const data = await response.json();
-        setAssignments(data.assignments);
-        setMaterials(data.materials);
-        setStatistics(data.statistics);
-        setMeetingLink(data.meeting_link);
-        setCalendlyLink(data.calendly_link);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
     }
+    
 
     fetchData();
   }, [course_id, token]);
