@@ -33,6 +33,7 @@ Route::group(["middleware" => "auth:api"], function (){
   Route::post("/create_material", [TeacherController::class, "createMaterial"]);
   Route::get("/courses", [TeacherController::class, "getClasses"]);
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
+  Route::post("/attendance", [TeacherController::class, "setAttendance"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
   Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
   Route::post('/update_submission_grade', [TeacherController::class, "updateSubmissionGrade"]);

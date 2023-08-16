@@ -1,22 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./styles.css"
 
-function StudentCard({ studentInfo }) {
+function StudentCard({ studentInfo ,course_id }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedAttendance, setEditedAttendance] = useState(studentInfo.attendance);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     setEditedAttendance(studentInfo.attendance);
-  };
-
-  const handleAttendanceChange = (event) => {
-    setEditedAttendance(event.target.value);
+    console.log(studentInfo)
   };
 
   const handleSaveAttendance = () => {
-    setIsEditing(false);
+
+      const token = localStorage.getItem('token');
+    
+      fetch('http://127.0.0.1:8000/api/Teacher/attendance', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          student_id: studentInfo.student.id,
+          course_id: course_id,
+          attendance: editedAttendance,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('Attendance updated successfully');
+            setIsEditing(false);
+          } else {
+            console.error('Error updating attendance');
+          }
+        })
+        .catch((error) => {
+          console.error('Error updating attendance:', error);
+        });
+
+    
   };
+
 
   return (
     <div className={`student-card ${isEditing ? 'editing' : ''}`}>
@@ -28,7 +53,7 @@ function StudentCard({ studentInfo }) {
             className="attendance-input"
             type="number"
             value={editedAttendance}
-            onChange={handleAttendanceChange}
+            onChange={(e)=>setEditedAttendance(e.target.value)}
           />
           <button className="save-attendance-button" onClick={handleSaveAttendance}>
             Save

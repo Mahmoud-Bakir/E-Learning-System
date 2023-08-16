@@ -33,7 +33,7 @@ function Students({course_id}) {
       <h2 className="course-title">Course: {courseData.course_name}</h2>
       <div className="students-container">
           {studentAnalytics.map((studentInfo) => (
-            <StudentCard key={studentInfo.student.id} studentInfo={studentInfo} />
+            <StudentCard key={studentInfo.student.id} studentInfo={studentInfo} course_id={courseData.id}/>
           ))}
       </div>
   </>);

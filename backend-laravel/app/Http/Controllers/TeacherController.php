@@ -96,8 +96,7 @@ class TeacherController extends Controller
     ], 200);
   }
 
-  function addCalendly(Request $request)
-  {
+  function addCalendly(Request $request){
       $auth_user = Auth::user();
       $course_id = $request->id;
       $course = Course::find($course_id);
@@ -135,5 +134,28 @@ class TeacherController extends Controller
             'message' => 'Grade updated successfully',
             'submission' => $submission,
         ], 200);
+    }
+
+    public function setAttendance(Request $request) {
+        $studentId = $request->student_id;
+        $courseId = $request->course_id;
+        $attendance = $request->attendance;
+    
+        $enrollment = StudentEnrollment::where('student_id', $studentId)
+            ->where('course_id', $courseId)
+            ->first();
+    
+        if (!$enrollment) {
+            return response()->json([
+                'message' => 'Enrollment not found',
+            ], 404);
+        }
+    
+        $enrollment->attendance = $attendance;
+        $enrollment->save();
+    
+        return response()->json([
+            'message' => 'Attendance updated successfully',
+        ]);
     }
 }
