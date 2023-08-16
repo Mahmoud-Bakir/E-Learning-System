@@ -48,7 +48,7 @@ const addUser = () =>{
   navigator('/add_user');
 }
 const addCourse = () =>{
-  navigator('/add_course');
+  navigator('/add_class');
 }
 const home = () =>{
   navigator('/');
