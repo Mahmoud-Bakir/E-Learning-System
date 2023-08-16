@@ -10,6 +10,7 @@ import PeopleTeacherPannel from '../../../Components/AdminComponents/AdminPannel
 import PeopleparentPannel from '../../../Components/AdminComponents/AdminPannels/PeopleParentPannel'
 import Course from '../../Parent/Course'
  const GeneralDashboard = () => {
+  const token = localStorage.getItem("token")
   const [people,setPeople] = useState(false)
   const [courses,setCourses] = useState(false)
   const [students,setStudents] = useState(false)
@@ -44,9 +45,24 @@ const handleParents = () => {
 }
 const navigator=useNavigate()
 const addUser = () =>{
-  navigator('/add');
+  navigator('/add_user');
 }
-
+const addCourse = () =>{
+  navigator('/add_course');
+}
+const home = () =>{
+  navigator('/');
+}
+const handleLogout = async()=>{
+  const response = await fetch('http://127.0.0.1:8000/api/logout', {
+    method: 'POST',
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+  console.log(response)
+  home()
+}
  console.log(courses)
  console.log(people)
 
@@ -54,9 +70,9 @@ const addUser = () =>{
   if(people&&students){
     return (
       <>
-      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People"/>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People" handleLogout={handleLogout}/>
       <div className='flex fullwidth gap-100  '>
-        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser}/>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAddUser={addUser} handleAddCourse={addCourse}/>
         <PeopleStudentPannel/> 
         <GeneralPannel visibility={"none"}/>
       </div>
@@ -66,9 +82,9 @@ const addUser = () =>{
    if(people&&parents){
     return (
       <>
-      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People"/>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People" handleLogout={handleLogout} />
       <div className='flex fullwidth gap-100  '>
-        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser}/>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser} handleAddCourse={addCourse}/>
         <PeopleparentPannel/>
         <GeneralPannel visibility={"none"}/>
       </div>
@@ -78,9 +94,9 @@ const addUser = () =>{
       if(people&&parents){
     return (
       <>
-      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People"/>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People" handleLogout={handleLogout} />
       <div className='flex fullwidth gap-100  '>
-        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser}/>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser} handleAddCourse={addCourse}/>
         <PeopleparentPannel/>
         <GeneralPannel visibility={"none"}/>
       </div>
@@ -90,9 +106,9 @@ const addUser = () =>{
    if(people&&teachers){
     return (
       <>
-      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People"/>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People" handleLogout={handleLogout} />
       <div className='flex fullwidth gap-100  '>
-        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser}/>
+        <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} display={visibility} handleAdd={addUser} handleAddCourse={addCourse}/>
         <PeopleTeacherPannel/>
         <GeneralPannel visibility={"none"}/>
       </div>
@@ -101,9 +117,9 @@ const addUser = () =>{
    }
     return(
     <>
-      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People"/>
+      <AdminNav handlePeople={handlePeople} handleCourses={handleCourses} t1="Courses" t2="People" handleLogout={handleLogout} />
      <div className='flex fullwidth gap-100  '>
-       <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} handleAdd={addUser} display={visibility}/>
+       <SideMenu handleStudents={handleStudents} handleTeachers={handleTeachers} handleParents={handleParents} handleAdd={addUser} display={visibility} handleAddCourse={addCourse}/>
        <GeneralPannel />
       </div>
    

@@ -4,8 +4,7 @@ import Header from "../../Header"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
-import ParentPannelData from "../../../ParentPannelData"
-
+import ParentPannelData from "../../ParentPannelData"
  const PeopleparentPannel = () => {
   const token = localStorage.getItem('token');
   const [records,setRecords] = useState([])

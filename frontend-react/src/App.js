@@ -13,9 +13,12 @@ import Student from "./pages/Student/Landing";
 import ViewClass from './pages/Student/ViewClass'
 import ViewAssignments from './pages/Student/ViewAssignments'
 import SubmitSolution from './pages/Student/SubmitSolution'
+import GeneralDashboard from "./pages/Admin/GeneralDashboard";
 
 import './styles/utilities.css' 
 import './styles/App.css' 
+import AddUser from "./pages/AddUser";
+import AddClass from "./pages/AddClass";
 
 
 function App() {
@@ -23,9 +26,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/add" element={<AddUser />} /> */}
+          <Route path="/add_user" element={<AddUser />} />
+          <Route path="/add_class" element={<AddClass />} />
           <Route path="/" element={<Authentication />} />
-          {/* <Route path="/Dashboard" element={<GeneralDashboard />} /> */}
+          <Route path="/Dashboard" element={<GeneralDashboard />} />
           <Route path="/Teacher" element={<Teacher/>} />
           <Route path="/Parent" element={<Parent/>} />
           <Route path="/course" element={<Course/>} />
