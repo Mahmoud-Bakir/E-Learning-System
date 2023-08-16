@@ -4,11 +4,11 @@ import ClassImageCard from '../../ParentComponents/ClassImageCard';
 import JoinCalendly from '../../ParentComponents/JoinCalendly';
 import Chat from '../../ParentComponents/Chat';
 
-const TeacherCommunication = () => {
+const TeacherCommunication = (courseData) => {
     return (
         <div>
             <div className='flex stream-body-container'>
-                <JoinCalendly/>
+                <JoinCalendly courseData = {courseData}/>
                 <Chat/>
             </div>
             

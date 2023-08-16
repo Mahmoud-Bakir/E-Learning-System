@@ -82,7 +82,7 @@ function Landing() {
   <div className="parent-navbar">
     <NavBar/>
     <ClassImageCard className="class-image"/>
-    <div className='flex column center parent-container'>  
+    <div className='flex column center child-parent-container'>  
       <div className='flex fullwidth'>
         <DisplayList children = {childrenData} onSelectChild={handleSelectChild}/>
         <div className='fullwidth'>
