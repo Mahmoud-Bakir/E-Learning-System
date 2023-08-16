@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
+import SubmissionCard from '../SubmissionsCard';
 
 function Submissions({ assignmentId }) {
   const [submissions, setSubmissions] = useState([]);
@@ -29,9 +30,9 @@ function Submissions({ assignmentId }) {
   }, [assignmentId]);
 
   return (
-    <div>
+    <div className='assignments-cont'>
       {submissions.map((submission) => (
-        <div key={submission.id}>{submission.id}</div>
+        <SubmissionCard submission={submission}/>
       ))}
     </div>
   );
