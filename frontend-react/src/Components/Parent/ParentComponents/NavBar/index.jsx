@@ -2,7 +2,7 @@ import logo from '../../../../assets/logo.png'
 import logout from '../../../../assets/logout.svg'
 import "./style.css"
 import { useNavigate } from "react-router-dom";
-import { localStorageAction } from '../../../../core/config/localstorage'
+import { localStorageAction } from '../../../../pages/Student/Core/config/localstorage'
 
 const NavBar = () => { 
   const navigation = useNavigate();
