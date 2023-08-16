@@ -7,8 +7,8 @@ import NavBar from '../../../Components/Parent/ParentComponents/NavBar'
 import ClassImageCard from '../../../Components/Parent/ParentComponents/ClassImageCard'
 
 import axios from "axios";
-import { sendRequest } from "../../../core/config/request";
-import { requestMethods } from "../../../core/enums/requestMethods";
+import { sendRequest } from "../../../pages/Student/Core/config/request";
+import { requestMethods } from "../../../pages/Student/Core/enums/requestMethods";
 import { useNavigate } from "react-router-dom";
 
 
