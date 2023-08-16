@@ -20,7 +20,8 @@ Route::group(["middleware" => "auth:api"], function (){
 
   Route::get("/get_students", [AdminController::class, "getAllStudents"]);
   Route::get("/get_teachers", [AdminController::class, "getAllTeachers"]);
-  Route::get("/get_parents", [AdminController::class, "getAllParents"])
+  Route::get("/get_parents", [AdminController::class, "getAllParents"]);
+  Route::get("/get_courses", [AdminController::class, "getAllCourses"]);
   ;
   Route::get("/courses_analytics", [AdminController::class, "getAllCoursesAnalytics"]);
   Route::post("/course_students_analytics", [AdminController::class, "getCourseStudentsAnalytics"]);
