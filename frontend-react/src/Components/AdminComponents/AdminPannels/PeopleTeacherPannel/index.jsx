@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
 import Teacher from "../../../../pages/Teacher"
-import TeacherPannelData from "../../../TeacherPannelData"
+import TeacherPannelData from "../../TeacherPannelData"
 
  const PeopleTeacherPannel = () => {
   const token = localStorage.getItem('token');
