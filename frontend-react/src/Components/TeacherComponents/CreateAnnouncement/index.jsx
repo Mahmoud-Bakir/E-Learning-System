@@ -18,12 +18,11 @@ function CreateAnnouncement ({course_id}) {
     setFileURL('');
   };
 
-  const handleCreate = async () => {
-
+  const handleCreate = () => {
     const route = isCreatingAssignment
       ? 'http://127.0.0.1:8000/api/Teacher/create_assignment'
       : 'http://127.0.0.1:8000/api/Teacher/create_material';
-
+  
     const data = isCreatingAssignment
       ? {
           title: title,
@@ -38,22 +37,28 @@ function CreateAnnouncement ({course_id}) {
           file_URL: fileURL,
           id: course_id,
         };
-
-    const response = await fetch(route, {
+  
+    fetch(route, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      resetFormFields();
-    } else {
-      console.error('Error creating', isCreatingAssignment ? 'assignment' : 'material');
-    }
+    })
+      .then((response) => {
+        if (response.ok) {
+          resetFormFields();
+        } else {
+          throw new Error(`Error creating ${isCreatingAssignment ? 'assignment' : 'material'}`);
+        }
+      })
+      .catch((error) => {
+        console.error('Error creating:', error);
+      });
   };
+  
+  
 
   return (
     <div className="assignments-container">
