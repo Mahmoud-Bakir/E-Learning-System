@@ -1,0 +1,66 @@
+
+.student-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+  }
+  
+  .student-name {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .student-email,
+  .student-attendance {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .attendance-edit {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .attendance-input {
+    width: 50px;
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .save-attendance-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-attendance-button {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .assignments-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .assignments-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .assignment-item {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
