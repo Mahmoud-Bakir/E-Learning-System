@@ -69,6 +69,7 @@ const CourseAnalysis = (selectedCourse) => {
         {
           "Section": "Average Grade",
           "Average": selectedCourse.selectedCourse.average_class_grade,
+
           "AverageColor": "hsl(0, 70%, 50%)",
         },
         {
@@ -82,7 +83,7 @@ const CourseAnalysis = (selectedCourse) => {
           "AverageColor": "hsl(240, 70%, 50%)",
         }
       ]
-    
+
     return (
         <div>
             <div className='chart'><Chart data = {data}/></div>
