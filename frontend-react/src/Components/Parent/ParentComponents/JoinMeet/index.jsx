@@ -3,7 +3,7 @@ import './styles.css';
 import MeetLogo from '../../../../assets/logo_meet.png';
 
 const JoinMeet = (courseData) => {
-  console.log(courseData.courseData.meeting_link);
+  // console.log('meeting ', courseData.courseData);
   const meetingLink = courseData.courseData.meeting_link;
 
   const handleJoinClick = () => {
