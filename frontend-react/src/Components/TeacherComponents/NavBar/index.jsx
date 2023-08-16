@@ -11,6 +11,11 @@ const NavBar = () => {
 
   const welcomeMessage = firstName && lastName ? `Welcome Teacher ${firstName} ${lastName}` : "";
 
+  const handleLogout = () =>{
+    localStorage.clear();
+    navigate("/")
+  }
+
   return (
     
     <>
@@ -23,7 +28,7 @@ const NavBar = () => {
          <span className='padding-20 pointer nav-tab'>{welcomeMessage}</span>
         </div>
         <div className='flex width-20 center gap-30 icons-container'>
-        <img src={logout} alt="" className='icon'/>
+        <img src={logout} alt="" className='icon' onClick={() => handleLogout()}/>
         </div>
 
       </div>
