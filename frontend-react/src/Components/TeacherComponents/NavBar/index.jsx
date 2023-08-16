@@ -2,12 +2,12 @@ import logo from '../../../assets/logo.png'
 import logout from '../../../assets/logout.svg'
 import { useNavigate } from 'react-router-dom';
 import "./style.css"
-import { localStorageAction } from '../../../core/config/localstorage'
+
 
 const NavBar = () => { 
   const navigate = useNavigate();
-  const firstName = localStorageAction("first_name");
-  const lastName = localStorageAction("last_name");
+  const firstName = localStorage.getItem("first_name");
+  const lastName = localStorage.getItem("last_name");
 
   const welcomeMessage = firstName && lastName ? `Welcome Teacher ${firstName} ${lastName}` : "";
 
