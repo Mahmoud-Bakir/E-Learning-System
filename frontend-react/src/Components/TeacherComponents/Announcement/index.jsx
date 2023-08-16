@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-
-function Announcement() {
+import CreateAnnouncement from '../CreateAnnouncement';
+function Announcement({course_id}) {
   return (
-    <div>Announcement</div>
+    <CreateAnnouncement  course_id={course_id}/>
   )
 }
 

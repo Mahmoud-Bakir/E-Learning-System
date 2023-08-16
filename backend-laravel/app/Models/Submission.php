@@ -9,6 +9,9 @@ class Submission extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+
     public function enrollment()
     {
         return $this->belongsTo(StudentEnrollment::class, 'EnrollmentID');
@@ -17,5 +20,10 @@ class Submission extends Model
     public function assignment()
     {
         return $this->belongsTo(Assignment::class, 'assignment_id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id', 'id');
     }
 }

@@ -11,31 +11,34 @@ function Meeting({ url, title, courseId }) {
     }
   };
 
-  const handleSaveMeetingLink = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/Teacher/calendly', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({
-          id: courseId,
-          calendly_link: meetingLink,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+  const handleSaveMeetingLink = () => {
+    fetch('http://127.0.0.1:8000/api/Teacher/calendly', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        id: courseId,
+        calendly_link: meetingLink,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error saving calendly link');
+        }
+      })
+      .then((data) => {
         setMeetingLink(data.calendly_link);
         setIsEditing(false);
-      } else {
-        console.error('Error saving calendly link');
-      }
-    } catch (error) {
-      console.error('Error saving calendly link:', error);
-    }
+      })
+      .catch((error) => {
+        console.error('Error saving calendly link:', error);
+      });
   };
+  
 
   const handleJoinMeeting = () => {
     window.open(meetingLink, '_blank');

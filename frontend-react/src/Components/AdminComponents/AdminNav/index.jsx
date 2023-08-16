@@ -6,7 +6,7 @@ import "../AdminNav/style.css"
 
 
 
-const AdminNav = () => {  
+const AdminNav = ({handleCourses,handlePeople,t1,t2}) => {  
   return (
     
     <>
@@ -16,8 +16,8 @@ const AdminNav = () => {
         <img src={logo} alt="" className='logo' />
        </div>
        <div className='flex width-20 center gap-100'>
-         <span className='padding-20 pointer nav-tab'>Courses</span>
-         <span className='padding-20 pointer nav-tab' >people</span>
+         <span className='padding-20 pointer nav-tab' onClick={handleCourses}>{t1}</span>
+         <span className='padding-20 pointer nav-tab' onClick={handlePeople} >{t2}</span>
         </div>
         <div className='flex width-20 center gap-30 icons-container'>
         <img src={message} alt="" className='icon' />

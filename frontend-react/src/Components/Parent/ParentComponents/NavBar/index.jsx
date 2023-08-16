@@ -2,7 +2,7 @@ import logo from '../../../../assets/logo.png'
 import logout from '../../../../assets/logout.svg'
 import "./style.css"
 import { useNavigate } from "react-router-dom";
-import { localStorageAction } from '../../../../core/config/localstorage'
+import { localStorageAction } from '../../../../pages/Student/Core/config/localstorage'
 
 const NavBar = () => { 
   const navigation = useNavigate();
@@ -15,13 +15,13 @@ const NavBar = () => {
   return (
     
     <>
-    <div className="flex fullwidth">
-      <div className=" flex fullwidth padding-20 circular-20 nav-bg margin-20 nav-text spaceBetween ">
+    <div className="flex navbar-parent-container">
+      <div className=" flex fullwidth padding-20 circular-20 nav-bg nav-text spaceBetween ">
        <div className='flex width-20 ' > 
         <img src={logo} alt="" className='logo' />
        </div>
        <div className='flex width-20 center gap-100'>
-         <span className='padding-20 pointer nav-tab'>{welcomeMessage}</span>
+         <span className='padding-20 nav-tab'>{welcomeMessage}</span>
         </div>
         <div className='flex width-20 center gap-30 icons-container'>
          <span 

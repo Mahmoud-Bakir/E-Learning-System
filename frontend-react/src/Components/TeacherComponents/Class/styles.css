@@ -1,6 +1,5 @@
 .class-content{
     display: flex;
-    height: 100vh;
     justify-content: space-around;
     margin: 50px;
     flex-wrap: wrap-reverse;
