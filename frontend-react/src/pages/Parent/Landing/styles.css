@@ -1,4 +1,16 @@
-.parent-container {
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.parent-navbar {
   width: 70%;
   margin: 0 auto;
 }
+
+.class-image {
+  margin: 0 auto;
+}
+/* .parent-container {
+  width: 70%;
+  margin: 0 auto;
+} */

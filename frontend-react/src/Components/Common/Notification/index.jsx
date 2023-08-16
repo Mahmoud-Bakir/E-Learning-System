@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 
-function Notification({ title, due = '', type }) {
+function Notification({ title, due = '', type, setAssignmentId, id, active =false }) {
   let img_src;
   
   if (type === 'assignment') {
@@ -10,8 +10,13 @@ function Notification({ title, due = '', type }) {
     img_src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR417_La1N7VTLFfeMZnEQSrUzRjGAXgFZeEfwitb_P4Lu3SzrgCdzFN7fBOZkkdW4Nqio&usqp=CAU";
   }
 
+  const handelAssignment = () => {
+    if(type === 'assignment' && active){
+    setAssignmentId(id);
+  }}
+
   return (
-    <div className='notification-container'>
+    <div className='notification-container' onClick= {()=>handelAssignment()}>
       <img className="notification-icon" src={img_src} alt="Notification Icon" />
       <div className='notification-content'>
         <h3>{title}</h3>

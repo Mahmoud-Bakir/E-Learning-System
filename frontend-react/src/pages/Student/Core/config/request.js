@@ -4,7 +4,7 @@ import { localStorageAction } from "./localstorage.js";
 axios.defaults.baseURL = "http://127.0.0.1:8000/api";
 
 export const sendRequest = async ({
-  method = "GET",
+  method ,
   route,
   body,
   includeHeaders = true,
@@ -27,3 +27,5 @@ export const sendRequest = async ({
     throw error;
   }
 };
+
+export default sendRequest;

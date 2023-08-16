@@ -5,10 +5,10 @@ import CalendarLogo from "../../../../assets/google-calendar.png"
 
 const JoinCalendly = () => {
     return (
-        <div className="google-meet">
-            <div className="google-meet-top">
+        <div className="google-calendly">
+            <div className="google-calendly-top">
                 <div>
-                    <div className="google-meet-logo">
+                    <div className="google-calendly-logo">
                         <img
                             src={CalendarLogo}
                             alt="Google Calendar"
