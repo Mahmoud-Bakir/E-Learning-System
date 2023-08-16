@@ -10,6 +10,7 @@ const Button = (props) => {
   const clickHandler = () => {
     if (props.enabled) {
       localStorage.setItem("course_id", props.k)
+      localStorage.setItem("assignment_id", props.k)
       if(props.enroll){
         props.enroll()
       }
