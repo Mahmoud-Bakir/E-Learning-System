@@ -30,10 +30,12 @@ Route::group(["middleware" => "auth:api"], function (){
 
  Route::group(["prefix" => "Teacher"], function(){
   Route::post("/create_assignment", [TeacherController::class, "createAssignment"]);
+  Route::post("/create_material", [TeacherController::class, "createMaterial"]);
   Route::get("/courses", [TeacherController::class, "getClasses"]);
   Route::post("/course_assignments", [TeacherController::class, "getCourseAssignments"]);
   Route::post("/course_elements", [TeacherController::class, "getCourseElements"]);
   Route::post("/submission", [TeacherController::class, "getAssignmentSubmissions"]);
+  Route::post('/update_submission_grade', [TeacherController::class, "updateSubmissionGrade"]);
   Route::post("/calendly", [TeacherController::class, "addCalendly"]);
  });
 
