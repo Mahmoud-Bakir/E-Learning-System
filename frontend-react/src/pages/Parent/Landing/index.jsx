@@ -7,8 +7,8 @@ import NavBar from '../../../Components/Parent/ParentComponents/NavBar'
 import ClassImageCard from '../../../Components/Parent/ParentComponents/ClassImageCard'
 
 import axios from "axios";
-import { sendRequest } from "../../../core/config/request";
-import { requestMethods } from "../../../core/enums/requestMethods";
+import { sendRequest } from "../../../pages/Student/Core/config/request";
+import { requestMethods } from "../../../pages/Student/Core/enums/requestMethods";
 import { useNavigate } from "react-router-dom";
 
 
@@ -51,6 +51,7 @@ function Landing() {
     setSelectedChildId(childId);
 
     const selectedChild = childrenData.find(child => child.id === childId);
+
     if (selectedChild) {
       
       setSelectedChildClasses(selectedChild.classes);
@@ -64,16 +65,11 @@ function Landing() {
   const handleSelectedCourse = (courseId, index) => {
     setselectedCourseId(courseId)
     setselectedCourseIndex(index)
-
-    console.log('courseId ', selectedCourseId)
-    console.log('Index ', selectedCourseIndex)
-
-    console.log('ChildClass ', selectedChildClasses[index])
+ 
     setselectedCourse(selectedChildClasses[index])
-    console.log('ChildClass 1 ',selectedCourse)
 
     if (selectedCourseId !== null && selectedCourseIndex !== null) {
-      console.log('entered');
+      // console.log('entered');
       navigation("/course", {
         state: {
           selectedCourse: selectedChildClasses[selectedCourseIndex]
@@ -85,11 +81,8 @@ function Landing() {
   return (
   <div className="parent-navbar">
     <NavBar/>
-    <div className='flex center'>
-    <ClassImageCard/>
-    </div>
-    
-    <div className='flex column center parent-container'>  
+    <ClassImageCard className="class-image"/>
+    <div className='flex column center child-parent-container'>  
       <div className='flex fullwidth'>
         <DisplayList children = {childrenData} onSelectChild={handleSelectChild}/>
         <div className='fullwidth'>

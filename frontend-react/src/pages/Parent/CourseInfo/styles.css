@@ -1,8 +1,12 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 .chart {
   height: 400px;
 }
 
 .parent-container {
-  max-width: 60%;
+  width: 70%;
   margin: 0 auto;
 }

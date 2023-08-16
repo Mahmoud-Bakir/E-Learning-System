@@ -1,0 +1,28 @@
+  .imagePlace {
+    overflow: hidden;
+    height: 60%;
+    width: 100%;
+  }
+  
+  .placeDetails {
+    padding: 0 10px;
+  }
+  
+  .placeDetails > p {
+    margin-bottom: 10px;
+  }
+  
+
+  .course-card{
+    margin: 10px;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    grid-row-gap: 10px;
+    border: 2px solid black ;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 20px;
+}

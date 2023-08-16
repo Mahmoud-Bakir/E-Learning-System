@@ -19,14 +19,12 @@ class TeacherController extends Controller
 {
 
    function createAssignment(Request $request) {
-    $course_name= $request->course_name;
-    $course_id = Course::where("course_name",$course_name)->first();
     $assignment = new Assignment();
     $assignment->title = $request->title;
     $assignment->description = $request->description;
     $assignment->due_date = $request->date;
     $assignment->total_grade = $request->total_grade;
-    $assignment->course_id = $course_id->id;
+    $assignment->course_id = $request->id;
     $assignment->save();
     return response()->json([
         "message" => "assignment created.",
@@ -35,10 +33,8 @@ class TeacherController extends Controller
   }
 
   function createMaterial(Request $request) {
-    $course_name= $request->course_name;
-    $course_id = Course::where("course_name",$course_name)->first();
     $material = new CourseMaterial();
-    $material->course_id = $course_id->id;
+    $material->course_id = $request->id;
     $material->title = $request->title;
     $material->description = $request->description;
     $material->file_URL = $request->file_URL;
@@ -100,8 +96,7 @@ class TeacherController extends Controller
     ], 200);
   }
 
-  function addCalendly(Request $request)
-  {
+  function addCalendly(Request $request){
       $auth_user = Auth::user();
       $course_id = $request->id;
       $course = Course::find($course_id);
@@ -124,10 +119,43 @@ class TeacherController extends Controller
   function getAssignmentSubmissions(Request $request){
     $auth_user = Auth::user();
     $assignment = Assignment::find($request->assignment_id);
-    $submissions = $assignment->submissions()->get();
+    $submissions = $assignment->submissions()->with('student')->get();
     return response()->json([
       "message" => "success",
       "submission" => $submissions,
       ], 200);
   }
+
+  function updateSubmissionGrade(Request $request){
+        $submission = Submission::find($request->submission_id);
+        $submission->grade = $request->grade;
+        $submission->save();
+        return response()->json([
+            'message' => 'Grade updated successfully',
+            'submission' => $submission,
+        ], 200);
+    }
+
+    public function setAttendance(Request $request) {
+        $studentId = $request->student_id;
+        $courseId = $request->course_id;
+        $attendance = $request->attendance;
+    
+        $enrollment = StudentEnrollment::where('student_id', $studentId)
+            ->where('course_id', $courseId)
+            ->first();
+    
+        if (!$enrollment) {
+            return response()->json([
+                'message' => 'Enrollment not found',
+            ], 404);
+        }
+    
+        $enrollment->attendance = $attendance;
+        $enrollment->save();
+    
+        return response()->json([
+            'message' => 'Attendance updated successfully',
+        ]);
+    }
 }

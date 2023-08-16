@@ -3,14 +3,13 @@ import './styles.css'
 
 import AssignmentCard from '../../ParentComponents/AssignmentCard';
 import JoinMeet from '../../ParentComponents/JoinMeet';
-import ClassImageCard from '../../ParentComponents/ClassImageCard';
 
-const Stream = () => {
+const Stream = ({selectedCourse, courseData}) => {
     return (
         <div>
             <div className='flex stream-body-container'>
-                <JoinMeet/>
-                <AssignmentCard/>
+                <JoinMeet courseData = {courseData}/>
+                <AssignmentCard selectedCourse = {selectedCourse}/>
             </div>
             
         </div>

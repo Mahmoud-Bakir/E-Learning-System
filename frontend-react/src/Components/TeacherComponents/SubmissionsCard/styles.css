@@ -1,0 +1,54 @@
+.submission-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .submission-card.editing {
+    background-color: #fff3d7;
+  }
+  
+  .submission-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .input-grade {
+    width: 50px;
+    padding: 5px;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .edit-grade-button,
+  .save-grade-button,
+  .cancel-edit-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .save-grade-button,
+  .cancel-edit-button {
+    background-color: #27ae60;
+  }
+  
+  .edit-grade-button:hover,
+  .save-grade-button:hover,
+  .cancel-edit-button:hover {
+    background-color: #236fa1;
+  }
+  
+  .input-grade:focus {
+    outline: none;
+    border-color: #3498db;
+  }
+  

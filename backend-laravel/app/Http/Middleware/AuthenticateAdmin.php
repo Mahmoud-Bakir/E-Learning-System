@@ -19,7 +19,7 @@ class AuthenticateAdmin
     {
         $user = Auth::user();
 
-        if ($user->user_type == 1) {
+        if ($user->user_type == 1 || $user->user_type == 2) {
             return $next($request);
         }
 

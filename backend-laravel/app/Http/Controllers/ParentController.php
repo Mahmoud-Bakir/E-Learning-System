@@ -49,7 +49,6 @@ class ParentController extends Controller {
                             'id' => $teacher->id,
                             'full_name' => $teacher->first_name . ' ' . $teacher->last_name,
                         ],
-                        // 'pivot' => $class->pivot,
                         'materials' => [],
                         'assignments' => [],
                         'average_class_grade' => 0,
