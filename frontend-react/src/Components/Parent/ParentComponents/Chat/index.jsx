@@ -27,8 +27,8 @@ const Chat = () => {
             
                 <div className="teacher-message flex">
                     <div className='flex column'>
-                        <p className='teacher-message-content'>Hello, how are you today?</p>
-                        <p className='teacher-message-date'>9:00 AM, Today</p>
+                        <p className='teacher-message-content'>Hello, I'm fine. How about you?</p>
+                        <p className='teacher-message-date'>9:02 AM, Today</p>
                     </div>
                 </div>
 

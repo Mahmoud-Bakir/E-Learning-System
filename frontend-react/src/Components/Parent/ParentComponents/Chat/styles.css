@@ -65,17 +65,12 @@
   font-size: 10px;
 }
 
-.input-container {
-  /* margin: 0 auto; */
-}
-
 .message-input-container {
   width: 100%;
   margin-top: auto;
   justify-content: space-around;
   display: flex;
   align-items: center;
-  /* background-color: white; */
   border-radius: 15px;
 }
 
