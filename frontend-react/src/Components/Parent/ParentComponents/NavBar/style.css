@@ -1,24 +1,30 @@
-.logo{
-    object-fit: cover;
-    min-width: 75px;
-    border-radius: 10px;
-    margin-left: 20px;
+.navbar-parent-container {
+  /* width: 70%; */
+  margin: 0 auto;
+  margin-top: 20px;
 }
-.icon{
-    object-fit: cover;
-    max-width: 100%;
-    max-height: 25px;
-    cursor: pointer;
-    border-radius: 10px;
+
+.logo {
+  object-fit: cover;
+  min-width: 75px;
+  border-radius: 10px;
+  margin-left: 20px;
 }
-.icons-container{
-    padding-left: 100px;
+.icon {
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 25px;
+  cursor: pointer;
+  border-radius: 10px;
 }
-.nav-tab{
-    font-size: larger;
-    padding: 10px 10px;
-    border-radius: 10px;
-  }
-  .nav-tab:hover{
-    background-color: #011348;
-  }
+.icons-container {
+  padding-left: 100px;
+}
+.nav-tab {
+  font-size: larger;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+.nav-tab:hover {
+  background-color: rgb(1, 19, 72);
+}

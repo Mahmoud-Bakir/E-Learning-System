@@ -4,3 +4,4 @@ export const requestMethods = {
   DELETE: "DELETE",
   PUT: "PUT",
 };
+export default requestMethods;

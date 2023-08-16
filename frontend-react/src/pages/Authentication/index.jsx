@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import logo from '../../assets/logo.png'
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
@@ -48,7 +49,7 @@ const SignIn = () => {
 
   const handleRole = (role) => {
     if (role === 1) {
-      navigate('/Student_Dashboard');
+      navigate('/Dashboard');
     } else if (role === 2) {
       navigate('/Teacher');
     } else if (role === 3) {
@@ -62,7 +63,7 @@ const SignIn = () => {
 
     <div className='center-auth'>
       <div className='signin-form'>
-        <h1>E-Learning</h1>
+        <img src={logo} alt="" />
 
         {errorMessage && <p className='error-message'>{errorMessage}</p>}
         {errorMessages && (
@@ -77,16 +78,16 @@ const SignIn = () => {
           </div>
         )}
         <div className='input-container '>
-          <label>Email:</label>
-          <input
+          <label className='button-text'>Email:</label>
+          <input className='header-text'
             type='text'
             value={credentials.email}
             onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
           />
         </div>
         <div className='input-container '>
-          <label>Password:</label>
-          <input
+          <label className='button-text'>Password:</label>
+          <input className='header-text'
             type='password'
             value={credentials.password}
             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}

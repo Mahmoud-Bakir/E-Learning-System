@@ -1,3 +1,52 @@
+// import React from 'react';
+// import './index.css';
+
+// import Chart from '../../ParentComponents/Chart';
+
+// const CourseAnalysis = ({ selectedCourse }) => {
+//   const attendancePercentage = Math.round(
+//     (selectedCourse.selectedCourse.attendance / selectedCourse.selectedCourse.sessions_number) * 100
+//   );
+
+//   let totalSubmissions = 0;
+
+//   selectedCourse.selectedCourse.assignments.forEach((assignment) => {
+//     totalSubmissions += assignment.submissions.length;
+//   });
+
+//   console.log(selectedCourse.selectedCourse)
+// //   const submissionsPercentage = Math.round((totalSubmissions / totalAssignments) * 100);
+
+// const data = [
+//     {
+//       "Section": "Average Grade",
+//         "Average": selectedCourse.selectedCourse.average_class_grade,
+//         // "Average": 0,
+//       "AverageColor": "hsl(0, 70%, 50%)",
+//     },
+//     {
+//       "Section": "Submitted Assignments %",
+//       "Submitted Assignments": 0,
+//       "AverageColor": "hsl(120, 70%, 50%)",
+//     },
+//     {
+//       "Section": "Attendance %",
+//       "Attendance": attendancePercentage,
+//       "AverageColor": "hsl(240, 70%, 50%)",
+//     }
+//   ]
+
+//   return (
+//     <div>
+//       <div className='chart'>
+//         <Chart data={data} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CourseAnalysis;
+
 import React from 'react';
 import './index.css'
 
@@ -5,32 +54,35 @@ import Chart from '../../ParentComponents/Chart'
 
 const CourseAnalysis = (selectedCourse) => {
 
+    const attendancePercentage = Math.round((selectedCourse.selectedCourse.attendance / selectedCourse.selectedCourse.sessions_number) * 100)
+
+    let totalSubmissions = 0;
+
+    selectedCourse.selectedCourse.assignments.forEach((assignment) => {
+        totalSubmissions += assignment.submissions.length;
+    });
+ 
+    const totalAssignments = selectedCourse.selectedCourse.assignments.length
+    const submissionsPercentage = Math.round((totalSubmissions / totalAssignments) * 100);
+
     const data = [
         {
           "Section": "Average Grade",
-            "Average": selectedCourse.selectedCourse.average_class_grade,
-            // "Average": 0,
+          "Average": selectedCourse.selectedCourse.average_class_grade,
+
           "AverageColor": "hsl(0, 70%, 50%)",
         },
         {
           "Section": "Submitted Assignments %",
-          "Submitted Assignments": 0,
+          "Submitted Assignments": submissionsPercentage,
           "AverageColor": "hsl(120, 70%, 50%)",
         },
         {
-          "Section": "Attendance",
-          "Attendance": 152,
+          "Section": "Attendance %",
+          "Attendance": attendancePercentage,
           "AverageColor": "hsl(240, 70%, 50%)",
         }
       ]
-
-    const log = (data) => {
-        console.log('course ', selectedCourse.selectedCourse.average_class_grade)
-        console.log( 'chart Data ',selectedCourse.selectedCourse.attendance)
-        console.log( 'chart Data ',selectedCourse.selectedCourse.sessions_number)
-    }
-    
-    log(data)
 
     return (
         <div>

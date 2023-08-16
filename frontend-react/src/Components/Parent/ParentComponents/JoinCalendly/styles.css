@@ -1,33 +1,33 @@
-.google-meet {
+.google-calendly {
   width: 200px;
   height: 150;
   display: flex;
   flex-direction: column;
   gap: 10px !important;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid rgb(1, 19, 72);
   padding: 10px;
 }
 
-.google-meet-top > div:first-child {
+.google-calendly-top > div:first-child {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.google-meet-logo {
+.google-calendly-logo {
   width: 25px;
   height: 25px;
 }
 
-.google-meet-logo img {
+.google-calendly-logo img {
   width: 100%;
 }
 
-.google-meet button {
+.google-calendly button {
   border-radius: 5px;
   padding: 8px 10px;
-  background-color: black;
+  background-color: rgb(1, 19, 72);
   color: white;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -35,4 +35,8 @@
   -o-border-radius: 5px;
   width: 100%;
   cursor: pointer;
+}
+
+.google-calendly button:hover {
+  background-color: rgb(39, 36, 236);
 }

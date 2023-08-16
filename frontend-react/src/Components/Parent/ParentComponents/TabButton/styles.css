@@ -1,5 +1,5 @@
 .tabButton {
-  height: 80px;
+  height: 70px;
   min-width: 80px;
   transition: 0.3s ease-in-out;
   align-items: center;
@@ -17,5 +17,9 @@
   height: 3px;
   width: 80%;
   border-radius: 1.5px;
-  background-color: black;
+  background-color: rgb(1, 19, 72);
+}
+
+.tabButton p {
+  font-weight: bold;
 }
