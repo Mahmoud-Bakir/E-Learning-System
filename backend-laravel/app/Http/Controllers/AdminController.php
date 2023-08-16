@@ -262,5 +262,12 @@ class AdminController extends Controller{
             'parents' => $parents,
          ]);
     }
+    function getAllCourses (){
+        $courses = Course::all();
+        return response()->json([
+            'courses' => $courses
+         ]);
+    }
+
 
 }
