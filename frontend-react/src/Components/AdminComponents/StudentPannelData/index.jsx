@@ -1,7 +1,8 @@
-import "./style.css"
-import  StudentRecord  from "../StudentRecord"
+import  StudentRecord  from "../ParentRecord"
+import StudentCourses from "../StudentCourses"
 
 export const StudentPannelData = ({records}) => {
+  
   return (
     <>{
       records.map((record) => (
@@ -10,6 +11,7 @@ export const StudentPannelData = ({records}) => {
         first={record.first_name}
         last={record.last_name}
         email={record.email}
+        courses={record.courses}
         key={record.id}
         />
      
@@ -18,3 +20,8 @@ export const StudentPannelData = ({records}) => {
   )
 } 
 export default StudentPannelData
+// courses={record.courses.map((te)=>{
+//   <StudentCourses
+//   name={te.course_name}
+//   />
+// })}

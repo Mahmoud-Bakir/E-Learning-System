@@ -1,5 +1,5 @@
 
-import TeacherRecord from "../AdminComponents/TeacherRecord"
+import TeacherRecord from "../TeacherRecord"
 
 export const TeacherPannelData = ({records}) => {
   return (

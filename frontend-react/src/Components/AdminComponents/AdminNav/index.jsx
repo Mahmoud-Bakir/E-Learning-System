@@ -6,7 +6,7 @@ import "../AdminNav/style.css"
 
 
 
-const AdminNav = ({handleCourses,handlePeople,t1,t2}) => {  
+const AdminNav = ({handleCourses,handlePeople,t1,t2,handleLogout}) => {  
   return (
     
     <>
@@ -22,7 +22,7 @@ const AdminNav = ({handleCourses,handlePeople,t1,t2}) => {
         <div className='flex width-20 center gap-30 icons-container'>
         <img src={message} alt="" className='icon' />
         <img src={settings} alt="" className='icon' />
-        <img src={logout} alt="" className='icon' />
+        <img src={logout} alt="" className='icon' onClick={handleLogout}/>
         </div>
 
       </div>
