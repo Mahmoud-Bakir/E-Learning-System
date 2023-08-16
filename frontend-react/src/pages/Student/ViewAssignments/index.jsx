@@ -1,14 +1,14 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import ClassCard from '../../../Components/ParentComponents/Classes'
-import sendRequest from '../../../Core/config/request.js'
-import requestMethods from '../../../Core/enums/requestMethods'
+import ClassCard from '../../../Components/StudentComponents/Classes'
+import sendRequest from '../Core/config/request.js'
+import requestMethods from '../Core/enums/requestMethods'
 import StudentNav from '../StudentNav'
 
 
 const ViewAssignments = ()=> {
   const navigation = useNavigate();
-  const [classes, setClasses ] = useState([]);
+  const [assignments, setAssignments ] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,10 +18,10 @@ const ViewAssignments = ()=> {
           body: { course_id: localStorage.getItem("course_id")}
         });
         console.log(response.classassignments);
-        if (Array.isArray(response)) {
-            setClasses(response.classassignments);
+        if (Array.isArray(response.classassignments)) {
+            setAssignments(response.classassignments);
           } else {
-            setClasses([]); // or handle the empty case in another way
+            setAssignments([]); // or handle the empty case in another way
           }
         // setClasses(response.data);
       } catch (error) {
@@ -33,14 +33,15 @@ const ViewAssignments = ()=> {
     };
     fetchData();
   }, []);
+
   return (
     <div className='flex column page'>
       <div className="flex wrap">
         <StudentNav t1={"Home"} t2={"Find Course"}/>
-        <ClassCard key={1} p1={"title"} p2 = {"description"} p4 = {"due_date"} p3 = {"couesr_id"} btn={"view assignment"} />;
-        {/* {classes.map((classs) => {
-            return <ClassCard key={classs.id} p1={classs.title} p2 = {classs.description} p4 = {classs.due_date} p3 = {classs.couesr_id} btn={"view assignment"} />;
-        })} */}
+        {assignments.map((asg) => {
+            const hasSolution = asg.submissions.length > 0
+            return <ClassCard key={asg.id} p1={asg.title} p2 = {asg.description} p4 = {asg.due_date} p3 = {asg.couesr_id} btn={"submit solution"} nav= {"/SubmitSolution"} enabled={hasSolution}/>;
+        })}
       </div>
     </div>
   )

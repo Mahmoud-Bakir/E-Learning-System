@@ -6,7 +6,7 @@ import requestMethods from '../Core/enums/requestMethods'
 import StudentNav from '../StudentNav'
 
 
-const Student = ()=> {
+const SubmitSolution = ()=> {
   const navigation = useNavigate();
   const [classes, setClasses ] = useState([]);
   useEffect(() => {
@@ -31,12 +31,14 @@ const Student = ()=> {
     <div className='flex column page'>
       <div className="flex wrap">
         <StudentNav t1={"Home"} t2={"Find Course"}/>
-        {classes.map((classs) => {
+        <div></div>
+
+        {/* {classes.map((classs) => {
             return <ClassCard key={classs.id} p1={classs.course_name} p2 = {classs.description} p4 = {classs.teacher.FullName} p3 = {classs.id} btn={"view calss"} nav= {"/ViewAssignments"} enabled={true}/>;
-        })}
+        })} */}
       </div>
     </div>
   )
 }
 
-export default Student
+export default SubmitSolution

@@ -44,7 +44,7 @@ Route::group(["middleware" => "auth:api"], function (){
  Route::group(["prefix" => "Student"], function(){
     Route::get("/get_all_courses", [StudentController::class, "getAllCourses"]);
     Route::get("/get_all_enrolled_courses", [StudentController::class, "getEnrolledCourses"]);
-    Route::post("/en``roll", [StudentController::class, "enrollUserInCourse"]);
+    Route::post("/enroll", [StudentController::class, "enrollUserInCourse"]);
     Route::post("/class_assignments", [StudentController::class, "getCourseAssignments"]);
     Route::post("/submit_assignment", [StudentController::class, "submitAssignment"]);
 
