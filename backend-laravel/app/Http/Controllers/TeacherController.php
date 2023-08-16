@@ -120,10 +120,20 @@ class TeacherController extends Controller
   function getAssignmentSubmissions(Request $request){
     $auth_user = Auth::user();
     $assignment = Assignment::find($request->assignment_id);
-    $submissions = $assignment->submissions()->get();
+    $submissions = $assignment->submissions()->with('student')->get();
     return response()->json([
       "message" => "success",
       "submission" => $submissions,
       ], 200);
   }
+
+  function updateSubmissionGrade(Request $request){
+        $submission = Submission::find($request->submission_id);
+        $submission->grade = $request->grade;
+        $submission->save();
+        return response()->json([
+            'message' => 'Grade updated successfully',
+            'submission' => $submission,
+        ], 200);
+    }
 }

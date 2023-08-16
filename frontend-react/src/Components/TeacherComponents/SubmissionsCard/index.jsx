@@ -15,9 +15,38 @@ function SubmissionCard({ submission }) {
   };
 
   const handleSaveGrade = () => {
-    submission.grade = editedGrade; 
-    setIsEditing(false);
+    const token = localStorage.getItem('token');
+    const submissionId = submission.id;
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        submission_id: submissionId,
+        grade: editedGrade,
+      }),
+    };
+
+    fetch('http://127.0.0.1:8000/api/Teacher/update_submission_grade', requestOptions)
+      .then(response => {
+        if (response.ok) {
+          submission.grade = editedGrade;
+          setIsEditing(false);
+        } else {
+          console.error('Error updating grade');
+        }
+      })
+      .catch(error => {
+        console.error('Error updating grade:', error);
+      });
   };
+
+  const handleOpenFile = () => {
+    window.open(submission.FilePath, '_blank');
+  }
 
   return (
     <div className={`submission-card ${isEditing ? 'editing' : ''}`}>
@@ -44,11 +73,14 @@ function SubmissionCard({ submission }) {
               Cancel
             </button>
           </>
-        ) : (
+        ) : (<>
           <button className="edit-grade-button" onClick={handleEditToggle}>
             Edit Grade
           </button>
-        )}
+          <button className="edit-grade-button" onClick={handleOpenFile}>
+            Open File
+          </button>
+        </>)}
       </div>
     </div>
   );

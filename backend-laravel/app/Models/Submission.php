@@ -9,6 +9,9 @@ class Submission extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+
     public function enrollment()
     {
         return $this->belongsTo(StudentEnrollment::class, 'EnrollmentID');
