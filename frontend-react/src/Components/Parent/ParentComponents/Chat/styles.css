@@ -1,15 +1,91 @@
 .chat-container {
-  border: 1px solid black;
-  border-radius: 10px;
+  height: 500px;
+  border: 1px solid rgb(1, 19, 72);
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgb(1, 19, 72, 0.5);
+  background: rgb(93, 219, 255);
+  background: linear-gradient(0deg, rgba(93, 219, 255, 1) 0%, #2b60ec 100%);
+  padding: 10px;
 }
 
 .chat-header {
   align-items: center;
   gap: 5%;
   padding: 10px;
+  border-bottom: 2px solid white;
+  color: white;
 }
 
 .header-profile-img {
   width: 70px;
   height: auto;
+}
+
+.chat-header p {
+  text-align: left;
+}
+
+.parent-message {
+  justify-content: flex-end;
+  width: 400px;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid white;
+  margin: 30px 20px;
+  margin-left: auto;
+  font-weight: bold;
+}
+
+.parent-message-content {
+  text-align: right;
+}
+
+.parent-message-date {
+  text-align: right;
+  font-size: 10px;
+}
+
+.teacher-message {
+  justify-content: flex-start;
+  width: 400px;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid white;
+  margin: 30px 20px;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.teacher-message-content {
+  text-align: left;
+}
+
+.teacher-message-date {
+  text-align: left;
+  font-size: 10px;
+}
+
+.input-container {
+  /* margin: 0 auto; */
+}
+
+.message-input-container {
+  width: 100%;
+  margin-top: auto;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  /* background-color: white; */
+  border-radius: 15px;
+}
+
+.message-input-container input {
+  width: 90%;
+}
+
+.message-input-container img {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  margin-left: 10px;
 }

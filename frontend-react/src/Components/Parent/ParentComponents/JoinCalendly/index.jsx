@@ -3,7 +3,13 @@ import './styles.css';
 
 import CalendarLogo from "../../../../assets/google-calendar.png"
 
-const JoinCalendly = () => {
+const JoinCalendly = (courseData) => {
+    // console.log('calendly ', courseData.courseData.courseData.calendly_link);
+    const calendlyLink = courseData.courseData.courseData.calendly_link;
+
+    const handleJoinClick = () => {
+        window.open(calendlyLink, '_blank');
+      };
     return (
         <div className="google-calendly">
             <div className="google-calendly-top">
@@ -18,7 +24,7 @@ const JoinCalendly = () => {
                 </div>
             </div>
             <div>
-                <button>Book A Meeting</button>
+                <button onClick={handleJoinClick}>Book A Meeting</button>
             </div>
         </div>
     );
