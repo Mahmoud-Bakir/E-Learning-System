@@ -15,14 +15,14 @@ function SubmissionCard({ submission }) {
   };
 
   const handleSaveGrade = () => {
-    // setSubmission({ ...submission, grade: editedGrade });
+    submission.grade = editedGrade; 
     setIsEditing(false);
   };
 
   return (
     <div className={`submission-card ${isEditing ? 'editing' : ''}`}>
       <div className="submission-details">
-        <p>Student ID: {submission.student_id}</p>
+        <p>Student Name: {submission.student.FullName}</p>
         {isEditing ? (
           <input
             className="input-grade"
